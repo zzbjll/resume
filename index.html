@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>张建乐 · 在线简历</title>
+<style>
+:root{--navy:#1F3864;--gray:#595959;--band:#EEF1F7;}
+*{box-sizing:border-box;}
+body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;color:#222;margin:0;background:#f2f3f5;}
+.page{max-width:820px;margin:0 auto;background:#fff;min-height:100vh;padding:24px 34px 40px;}
+h1{font-size:26px;color:var(--navy);margin:0 0 2px;}
+.title{font-size:15px;font-weight:bold;color:var(--navy);margin:0 0 2px;}
+.contact{font-size:12px;color:var(--gray);margin:0 0 10px;}
+.band{background:var(--band);color:var(--navy);padding:8px 10px;font-size:13px;line-height:1.55;border-radius:3px;}
+.summary{font-size:13px;line-height:1.6;margin:10px 0 0;}
+h2{font-size:15px;color:var(--navy);border-bottom:1px solid var(--navy);padding-bottom:3px;margin:18px 0 8px;}
+.item{display:flex;justify-content:space-between;gap:10px;font-size:14px;font-weight:bold;margin:10px 0 3px;}
+.item .date{font-weight:normal;color:var(--gray);font-size:12.5px;white-space:nowrap;}
+ul{margin:3px 0 6px;padding-left:18px;}
+li{font-size:13px;line-height:1.6;margin:2px 0;}
+p{font-size:13px;line-height:1.6;margin:3px 0;}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;}
+.tabs button{font-family:inherit;font-size:12.5px;padding:4px 12px;border:1px solid #c9d2e0;background:#fff;color:var(--navy);border-radius:14px;cursor:pointer;}
+.tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy);}
+.dl{margin:26px 0 0;padding-top:10px;border-top:1px dashed #c9d2e0;font-size:12.5px;color:var(--gray);}
+.dl a{color:var(--navy);margin-right:12px;}
+@media(max-width:640px){.page{padding:16px 16px 30px;}h1{font-size:22px;}.item{flex-direction:column;gap:0;}}
+</style></head><body><div class="page">
+<nav class="tabs"><button data-t="AI架构师" class="on">AI 架构师</button><button data-t="AI工程化">AI 工程化</button><button data-t="大模型应用开发">大模型应用开发</button><button data-t="系统架构师">系统架构师</button><button data-t="资深后端开发">资深后端开发</button></nav>
+<section class="resume" data-k="AI架构师" style="display:block">
+<h1>张建乐</h1>
+<p class="title">AI 架构师 · 金融 AI 基建</p>
+<p class="contact">电话 15221599617 · 邮箱 zhangjianle617@163.com · 可随时到岗</p>
+<div class="band"><strong>三次 0-1</strong> 建成生产系统 ｜ LLM 网关 <strong>30.1s→3.6s</strong> · 记忆 <strong>P@1 0.907</strong> · 意图 <strong>70%→90%</strong> · 成本 <strong>-60%</strong> · 雪崩治理 <strong>6.6s→264ms</strong> ｜ <strong>10 年</strong>后端 · <strong>6 年</strong>金融 · 近 3 年 AI 工程化</div>
+<p class="summary">能建 AI 系统,也扛过资金级正确性:多厂商 LLM 网关、长时记忆、Agent 平台、AI 工程化平台均已生产运行;10 年金融后端底座(资产/资金/导流三端),把&quot;AI 能力&quot;与&quot;资金正确性&quot;放进同一套架构与治理体系。</p>
+<h2>核心能力</h2>
+<ul>
+<li><strong>AI 平台架构</strong>:多厂商 LLM 网关(档位抽象/成本计量/蓝绿零断流)、长时记忆(事件溯源/双臂召回 RRF)、多租户配额与密钥隔离、MCP</li>
+<li><strong>Agent 与 RAG 体系</strong>:Multi-Agent 编排、Tool Calling 与权限闸、RAG 全链路(混合召回/重排/评测)、幻觉守门</li>
+<li><strong>AI 工程化治理</strong>:自治研发流水线、证据链质量判官、生产发布 SHA 门禁、Hook 体系</li>
+<li><strong>后端与平台架构</strong>:防腐层 ACL/适配器 SPI、微服务与中台、状态机与终态保护、分布式一致性(锁/Outbox/CAS)、高并发与海量数据</li>
+<li><strong>数据与可观测</strong>:ClickHouse(向量列/千万行级)、Redis、Elasticsearch、MySQL 分库分表、JVM 调优</li>
+</ul>
+<h2>项目经历</h2>
+<div class="item"><span>企业级 LLM 网关与长时记忆 ｜ 同司 AI 基建 · 主导</span><span class="date">2026.07-至今</span></div>
+<ul>
+<li><strong>LLM 网关</strong>(Python asyncio):统一多供应商接入、语义档位路由(换厂商不改代码)、流式透传、token 用量与成本计量;请求路径三处同步阻塞系统性治理,端到端 <strong>30.1s→3.6s</strong>;看门狗自愈+蓝绿双实例零断流</li>
+<li><strong>长时记忆系统</strong>:事件溯源架构(纯追加 SSOT+ReplacingMergeTree 投影);召回三代演进到词法+向量双臂 RRF+强命中保护,<strong>P@1 0.45→0.907</strong>;热 Redis 冷 CK 分层、双机增量同步、每日零-token 自检</li>
+<li>多租户配额与密钥隔离;Singleflight 缓存击穿防护(SETNX+Lua);MCP 封装共享记忆底座,支撑多 Agent 协作</li>
+</ul>
+<div class="item"><span>金融导流平台(双产品线) ｜ 重庆智识维度 · 技术负责人</span><span class="date">2026.06-至今</span></div>
+<p>0→1 主导全链路架构与 AI-Native 交付(以 AI 为主力完成设计/开发/测试/运维):上游流量 → 撞库 → 前筛 → 路由资方 → 授信/放款 → 双向对账。</p>
+<ul>
+<li>N×M 集成枢纽(防腐层 ACL):渠道差异收敛适配器 SPI,异构加解密 <strong>7 层正交策略</strong>,新渠道=配置+实现类+契约测试</li>
+<li>稳定性攻坚:<strong>6.6s→264ms(25x)</strong> 雪崩治理、<strong>29.5s→2.5s</strong> 链路提速;互斥锁防双推、Transactional Outbox、终态 CAS 出口;全量入 ClickHouse 可观测</li>
+<li>技术栈:Spring Boot、MyBatis-Plus、MySQL 8、Redis、ClickHouse、XXL-JOB、Docker/K8s</li>
+</ul>
+<div class="item"><span>AI 工程化平台 ｜ 个人技术基建 · 独立搭建</span><span class="date">2024 起</span></div>
+<p>自治研发流水线(无人值守+异构双模型验收门)、质量判官(证据链核验)、发布 SHA 门禁、Hook 体系;支撑贷超与量化两个生产系统 AI 主导交付。</p>
+<div class="item"><span>金融智能问答与 Agent 平台 ｜ 小象优品 · 核心开发(3-5 人)</span><span class="date">2024.06-2025.11</span></div>
+<ul>
+<li>意图路由+工具编排(plan-execute 执行链、4 条权限闸、澄清转人工),意图识别 <strong>70%→90%</strong>;1,200+ 评测集+offline replay;单会话成本 <strong>-60%</strong>;三层幻觉守门</li>
+<li>三级可见性权限、12 字段审计脱敏、13 条防编造硬约束</li>
+<li>技术栈:Python、FastAPI、Milvus、Reranker、LangGraph</li>
+</ul>
+<div class="item"><span>A 股量化系统 ｜ 独立自建(Qlib 重构)</span><span class="date">2025.12-2026.06</span></div>
+<p>404 张表 ClickHouse 底座、67 采集管道、273 调度任务;撮合引擎四层架构重构;三硬闸(DSR/PBO/ΔIC)拦截 Sharpe 虚高 2.2x;多 Agent 辩论交易与仲裁。</p>
+<div class="item"><span>消费金融核心链路 ｜ 小象优品 · Java 资深开发</span><span class="date">2021.12-2025.11</span></div>
+<p>京东/360/百融等 5+ 资产方与多家资金方接入;扣款时序/分布式锁/MQ 顺序消费治理;团队收缩后留守核心。</p>
+<div class="item"><span>早期经历 ｜ 盛大汽车 · 豌豆思维 · 早期 Java</span><span class="date">2016.07-2021.11</span></div>
+<p>盛大汽车(2018-2020):日订单 100 万+、月流水 1 亿+ 金融租赁平台,微服务拆分;豌豆思维(2020-2021):亿级分表、ES 2 亿+记录、质检 T+1→1h;更早:消息推送平台(日活千万级)。</p>
+<h2>教育</h2>
+<ul>
+<li>史蒂文斯理工学院 计算机科学 硕士(在读,AI 方向,2025.09-2027.06);徐州工程学院 计算机科学与技术 本科(统招全日制,2012.09-2016.06)</li>
+<li>阿里云大模型 ACP(2026.04)· 上海市人工智能训练师三级(2025.09)</li>
+</ul>
+</section><section class="resume" data-k="AI工程化" style="display:none">
+<h1>张建乐</h1>
+<p class="title">AI 工程化架构师 · 研发流程再造</p>
+<p class="contact">电话 15221599617 · 邮箱 zhangjianle617@163.com · 可随时到岗</p>
+<div class="band">以 AI 为主力交付 <strong>2 套生产系统</strong>(金融贷超 + 量化) ｜ 自治流水线 <strong>110+</strong> 无人值守班次 · 质量判官 <strong>51 版/268 条回归</strong> · 发布 SHA 门禁 <strong>4 条线</strong> ｜ 网关 <strong>30.1s→3.6s</strong> · 记忆 <strong>P@1 0.907</strong> ｜ <strong>10 年</strong>后端 · <strong>6 年</strong>金融</div>
+<p class="summary">用 AI 再造研发流程本身——把 AI 从&quot;辅助工具&quot;做成研发基础设施:自治研发流水线(无人值守)、证据链质量判官、生产发布硬闸、Hook 插件体系;AI 产出的代码直接上真金融生产。10 年金融后端底座,懂资金正确性、敢让 AI 上生产。</p>
+<h2>核心能力</h2>
+<ul>
+<li><strong>自治研发流水线</strong>:FSM 状态机编排无人值守研发;异构双模型验收门(读 git diff 三态裁决);红区硬拦截;元审计(审流水线自身);并发控制(OS 文件锁+飞书 outbox)</li>
+<li><strong>质量与发布门禁</strong>:确定性规则引擎判官(工具调用与结果配对核验,无证据即拦截);上生产强制同 sha 先过 test;双写留痕(本机 manifest+远程 CK),发布全程可追溯可回滚</li>
+<li><strong>AI 基建</strong>:多厂商 LLM 网关(档位路由/成本计量/蓝绿零断流)、长时记忆(事件溯源/双臂召回/P@1 0.907)、MCP 记忆中间件</li>
+<li><strong>Agent 工程</strong>:Multi-Agent 编排(规划-执行-评审)、上下文工程与长时记忆、轨迹评测、Clarify-first 置信度路由</li>
+<li><strong>底座</strong>:Python/asyncio、Java/Spring、ClickHouse、Redis、Docker/K8s、LangGraph、Hook 插件体系(PreToolUse/SessionStart/Stop)</li>
+</ul>
+<h2>项目经历</h2>
+<div class="item"><span>AI 工程化平台 ｜ 个人技术基建 · 独立搭建与持续迭代</span><span class="date">2024 起</span></div>
+<p>覆盖编码→评审→测试→发布→运维全链路的 AI 基础设施,支撑金融贷超与 A 股量化两个生产系统的 AI 主导交付;十余次生产事故沉淀为制度化质量门禁与回滚体系。</p>
+<ul>
+<li><strong>Autodev 自治研发流水线</strong>:FSM 状态机编排夜班无人值守研发(110+ 班次);Windows Job Object 杀孤儿进程、OS 文件锁+飞书 outbox 并发控制;<strong>异构双模型 ship-gate</strong>(异厂商模型读 diff 验收,全 PASS 才自动合入,三态裁决+核心改动提案流程)</li>
+<li><strong>代码质量判官</strong>:确定性规则引擎自动裁决&quot;完成声明&quot;真伪——工具调用与结果配对核验,无证据即拦截;51 版迭代、268 条全量回归绿;覆盖发布/数据/破坏性操作三大高风险域</li>
+<li><strong>生产发布 SHA 门禁</strong>:上生产脚本强制同 sha 先过 test,工具调用前硬闸拦截裸操作;双写留痕(本机+远程 CK),4 条线全覆盖</li>
+<li><strong>Hook 插件体系</strong>:PreToolUse/SessionStart/Stop 三态钩子,插件化新规则零侵入接入,覆盖安全闸/记忆注入/质量门禁/健康检查</li>
+<li>技术栈:Python/asyncio、ClickHouse、Redis、Docker、LangGraph、MCP</li>
+</ul>
+<div class="item"><span>金融导流平台(双产品线) ｜ 重庆智识维度 · 技术负责人</span><span class="date">2026.06-至今</span></div>
+<p>AI-Native 交付模式:以 AI 为主力完成设计/开发/测试/运维;撞库→前筛→路由→授信/放款→对账全链路 0→1。</p>
+<ul>
+<li>两次生产攻坚:撞库雪崩 <strong>6.6s→264ms(25x)</strong>、进件超时(GC 冻结 26s)<strong>29.5s→2.5s</strong>;互斥锁防双推资损、Transactional Outbox、终态 CAS 出口</li>
+<li>全量报文/日志/事件入 ClickHouse(trace_id 全链路),ERROR 巡检+飞书告警;发布门禁(逐台摘流/双身份校验/全量回滚点)</li>
+<li>技术栈:Spring Boot、MyBatis-Plus、MySQL 8、Redis、ClickHouse、XXL-JOB、Docker/K8s</li>
+</ul>
+<div class="item"><span>企业级 LLM 网关与长时记忆 ｜ 同司 AI 基建 · 主导</span><span class="date">2026.07-至今</span></div>
+<ul>
+<li><strong>LLM 网关</strong>(Python asyncio):多供应商统一接入、语义档位路由、流式透传、token 成本计量;请求路径三处同步阻塞治理,端到端 <strong>30.1s→3.6s</strong>;裸 TCP 看门狗自愈、蓝绿零断流</li>
+<li><strong>长时记忆系统</strong>:事件溯源(纯追加 SSOT+投影);词法+向量双臂 RRF 融合+强命中保护,<strong>P@1 0.45→0.907</strong>;热 Redis 冷 CK、双机增量同步、每日零-token 自检回路</li>
+<li>MCP 封装记忆中间件,多项目共享同一记忆底座,支撑多 Agent 协作</li>
+</ul>
+<div class="item"><span>金融智能问答与 Agent 平台 ｜ 小象优品 · 核心开发(3-5 人)</span><span class="date">2024.06-2025.11</span></div>
+<ul>
+<li>意图路由+工具编排:plan-execute 执行链、4 条工具权限闸、连续澄清转人工;意图识别 <strong>70%→90%</strong>;1,200+ 条评测集+offline replay 驱动迭代;成本 <strong>-60%</strong>;意图-工具-知识三层幻觉守门</li>
+<li>技术栈:Python、FastAPI、Milvus、Reranker、LangGraph</li>
+</ul>
+<div class="item"><span>A 股量化系统 ｜ 独立自建(Qlib 重构)</span><span class="date">2025.12-2026.06</span></div>
+<p>404 张表数据底座、67 采集管道、273 调度任务;LLM 因子发现自动化;多 Agent 辩论交易;三硬闸(DSR/PBO/ΔIC)拦截 Sharpe 虚高 2.2x 模型上线。</p>
+<div class="item"><span>早期经历 ｜ 盛大汽车 · 豌豆思维 · 早期 Java</span><span class="date">2016.07-2021.11</span></div>
+<p>盛大汽车(2018-2020):日订单 100 万+ 金融租赁平台,微服务拆分;豌豆思维(2020-2021):外呼重构、亿级分表、ES 2 亿+记录、质检 T+1→1h;更早:消息推送平台(日活千万级)。</p>
+<h2>教育</h2>
+<ul>
+<li>史蒂文斯理工学院 计算机科学 硕士(在读,AI 方向,2025.09-2027.06);徐州工程学院 计算机科学与技术 本科(统招全日制,2012.09-2016.06)</li>
+<li>阿里云大模型 ACP(2026.04)· 上海市人工智能训练师三级(2025.09)</li>
+</ul>
+</section><section class="resume" data-k="大模型应用开发" style="display:none">
+<h1>张建乐</h1>
+<p class="title">大模型应用开发工程师 · 金融场景</p>
+<p class="contact">电话 15221599617 · 邮箱 zhangjianle617@163.com · 可随时到岗</p>
+<div class="band">意图识别 <strong>70%→90%</strong> · 单会话成本 <strong>-60%</strong> · 评测集 <strong>1,200+ 条</strong> · 记忆召回 <strong>P@1 0.907</strong> ｜ RAG 全链路 · Agent 工具编排 · 评测闭环 ｜ <strong>10 年</strong>工程 · <strong>6 年</strong>金融</div>
+<p class="summary">把大模型接进真业务:金融合规场景的 RAG 全链路、Agent 工具编排与评测驱动迭代(意图识别 70%→90%、单会话成本 -60%);企业级平台自研而非采购;微调/对齐有完整数据工程与训练管线实践。10 年金融后端底座,懂业务正确性,幻觉守门宁拒不编。</p>
+<h2>核心能力</h2>
+<ul>
+<li><strong>RAG 全链路</strong>:多模态解析(MinerU/dots-OCR)、两级切分、FTS+向量混合召回、cross-encoder 重排、RAGAS 在线自评、幻觉守门(召回不足强制兜底)</li>
+<li><strong>Agent 与工具编排</strong>:Tool Calling/Planner/ToolRegistry、policy 工具权限闸、置信度路由、连续澄清转人工、SSE 流式、LangGraph 状态图工作流</li>
+<li><strong>评测与对齐</strong>:人工标注评测集+offline replay+diff/root-cause/版本化;LoRA/DPO 数据工程(3,000+ 意图指令、1,500+ 偏好对)、MacBERT/BGE 对照实验、OpenVINO int8 量化部署(7.5x)</li>
+<li><strong>工程实现</strong>:Python(asyncio/FastAPI)、Milvus/SQLite FTS/Redis VECTOR/ClickHouse、RPM 限速与 429 退避、Prompt 工程</li>
+<li><strong>金融与后端</strong>:贷前贷中贷后、资产/资金端、合规审计(权限隔离/脱敏/越权拦截);Java/Spring、MySQL/Redis/ES</li>
+</ul>
+<h2>项目经历</h2>
+<div class="item"><span>金融智能问答与 Agent 平台 ｜ 小象优品 · 核心开发(3-5 人)</span><span class="date">2024.06-2025.11</span></div>
+<p>金融合规场景企业级智能查询与工具编排平台:外/内双场景,3 业务应用+1 共享中台,自研(通用知识库无法满足权限差异与审计合规)。</p>
+<ul>
+<li><strong>路由与可控性</strong>:三级置信度阈值+policy-aware 执行(4 条工具权限闸),连续澄清 3 次转人工;14 类意图规则基线+分类器可插拔;意图识别 <strong>70%→90%</strong>(1,200+ 样本离线回放口径)</li>
+<li><strong>工具编排与知识链路</strong>:ToolRegistry/Executor/Planner 联动额度/借款/还款/物流 4 大业务域;900+ 篇文档接入(MinerU 版面解析)、双路召回+cross-encoder 重排、幻觉守门(召回不足宁拒不编)</li>
+<li><strong>评测闭环与成本</strong>:1,200+ 条人工标注评测集(五类,含 600+ 工具调用样本);offline replay+diff+root-cause+四维版本化;分层调度(轻/重模型)后单会话 token 成本 <strong>-60%</strong></li>
+<li><strong>安全合规</strong>:三级可见性权限隔离、scope 越权拦截、身份字段服务端覆写、12 字段全链路审计(落盘前递归脱敏)、13 条 prompt 防编造硬约束</li>
+<li>技术栈:Python、FastAPI、SQLite FTS、Sentence-Transformers、Milvus、Reranker、LangGraph、RAGAS</li>
+</ul>
+<div class="item"><span>企业级 LLM 网关与长时记忆 ｜ 同司 AI 基建 · 主导</span><span class="date">2026.07-至今</span></div>
+<ul>
+<li><strong>LLM 网关</strong>(Python asyncio):多供应商统一接入、语义档位路由(换厂商不改代码)、流式透传、token 用量与成本计量;端到端 <strong>30.1s→3.6s</strong>,蓝绿零断流</li>
+<li><strong>长时记忆系统</strong>:事件溯源+词法/向量双臂 RRF 召回+强命中保护,<strong>P@1 0.45→0.907</strong>;热 Redis 冷 CK 分层、每日零-token 自检回路</li>
+<li>MCP 封装记忆中间件,多项目共享同一记忆底座,支撑多 Agent 协作</li>
+</ul>
+<div class="item"><span>金融导流平台(双产品线) ｜ 重庆智识维度 · 技术负责人</span><span class="date">2026.06-至今</span></div>
+<p>AI-Native 交付模式:以 AI 为主力完成设计/开发/测试/运维;撞库→前筛→路由→授信/放款→对账全链路 0→1。</p>
+<ul>
+<li>两次生产攻坚:撞库雪崩 <strong>6.6s→264ms(25x)</strong>、进件超时(GC 冻结 26s)<strong>29.5s→2.5s</strong>;互斥锁防双推资损、Transactional Outbox、终态 CAS 出口</li>
+<li>全量报文/日志/事件入 ClickHouse(trace_id 全链路),ERROR 巡检+飞书告警;发布门禁(逐台摘流/双身份校验/全量回滚点)</li>
+<li>技术栈:Spring Boot、MyBatis-Plus、MySQL 8、Redis、ClickHouse、XXL-JOB、Docker/K8s</li>
+</ul>
+<div class="item"><span>A 股量化研究系统 ｜ 独立自建(Qlib 重构)</span><span class="date">2025.12-2026.06</span></div>
+<p>404 张表数据底座、67 条采集管道、273 个调度任务日终编排;LLM 因子发现自动化;多 Agent 辩论交易与仲裁;三硬闸(DSR/PBO/ΔIC)拦截 Sharpe 虚高 2.2x 模型上线。</p>
+<div class="item"><span>消费金融核心链路 ｜ 小象优品 · Java 资深开发</span><span class="date">2021.12-2025.11</span></div>
+<p>京东/360/百融等 5+ 资产方与多家资金方接入;资金最终一致治理(扣款时序/分布式锁/MQ 顺序消费);团队收缩后留守核心。</p>
+<div class="item"><span>早期 ｜ 上海广升 / 上海致宇 · Java 开发</span><span class="date">2016.07-2018.07</span></div>
+<p>消息推送平台(日活千万级)、银行资管系统。</p>
+<h2>个人作品集(工程级,可现场演示)</h2>
+<ul>
+<li><strong>多模态 RAG 工程</strong>:dots-OCR(vLLM 部署)版面解析 → 标题+语义两级切分 → 多模态向量 → Milvus BM25/dense 混合检索 → LangGraph 10 节点工作流;RAGAS 在线自评(低分丢弃、&lt;0.7 触发人工审批)</li>
+<li><strong>DeepResearch 编排引擎</strong>:任务分解 → 主循环 ≤5 迭代 × ≤6 并行 OODA worker,质量门槛+收益递减早停;来源域名分级;FastAPI+SSE 流式;已服务化进生产链路(政策事实回指硬闸防 LLM 编造)</li>
+</ul>
+<h2>教育</h2>
+<ul>
+<li>史蒂文斯理工学院 计算机科学 硕士(在读,AI 方向,2025.09-2027.06);徐州工程学院 计算机科学与技术 本科(统招全日制,2012.09-2016.06)</li>
+<li>阿里云大模型 ACP(2026.04)· 上海市人工智能训练师三级(2025.09)</li>
+<li>模型工程实践:微调数据工程(3,000+ 意图指令、1,500+ DPO 偏好对、9 维 reward 计分)、LoRA/DPO 训练管线、MacBERT/BGE 中文金融意图识别对照(2,000 条)、OpenVINO int8 量化部署(7.5x 加速)</li>
+</ul>
+</section><section class="resume" data-k="系统架构师" style="display:none">
+<h1>张建乐</h1>
+<p class="title">系统架构师 · 金融 × AI</p>
+<p class="contact">电话 15221599617 · 邮箱 zhangjianle617@163.com · 可随时到岗</p>
+<div class="band"><strong>三次 0-1</strong> 建成生产系统(AI 工程化平台 / 金融贷超 / A 股量化) ｜ 集成枢纽 ACL · 加解密 <strong>7 层正交策略</strong> · 新渠道=配置+实现类 ｜ 雪崩治理 <strong>6.6s→264ms(25x)</strong> · 链路提速 <strong>29.5s→2.5s(12x)</strong> · 发布门禁体系 ｜ <strong>10 年</strong>后端 · <strong>6 年</strong>金融</div>
+<p class="summary">10 年金融后端,三次 0-1:贷超导流平台(技术负责人)、AI 工程化平台、量化系统。擅长把渠道/资方/协议的差异收敛成适配器架构,把稳定性与一致性做成体系(门禁/对账/回滚),并用 AI 再造研发流程、支撑生产交付。</p>
+<h2>核心能力</h2>
+<ul>
+<li><strong>架构设计</strong>:N×M 集成枢纽(防腐层 ACL/适配器 SPI)、微服务拆分与中台化、状态机与终态保护、加解密正交分层、多租户配额与密钥隔离</li>
+<li><strong>稳定性与一致性</strong>:雪崩根因治理、熔断/背压/有界池、分布式锁(Lua CAS)、Transactional Outbox、上下游双向对账、终态 CAS 统一出口</li>
+<li><strong>技术治理</strong>:发布前检查/逐台摘流/双身份校验/全量回滚点;十余次事故复盘沉淀为制度化门禁;ERROR 级巡检+告警收口</li>
+<li><strong>AI 基建架构</strong>:LLM 网关(多厂商/档位路由/成本计量/蓝绿零断流)、长时记忆(事件溯源+双臂召回 RRF,P@1 0.907)、MCP 中间件</li>
+<li><strong>技术底座</strong>:Java/Spring Cloud、Python/asyncio、MySQL 分库分表、Redis、ClickHouse、Kafka/RabbitMQ、Elasticsearch、Docker/K8s、JVM 调优</li>
+</ul>
+<h2>项目经历</h2>
+<div class="item"><span>金融导流平台(双产品线) ｜ 重庆智识维度 · 技术负责人</span><span class="date">2026.06-至今</span></div>
+<p>0→1 主导全链路架构:上游多源流量 → 撞库去重 → 前筛规则引擎 → 路由多家资方 → 授信/放款回传 → 双向对账。</p>
+<ul>
+<li><strong>N×M 集成枢纽(防腐层 ACL)</strong>:核心域只认 Canonical 规范模型,渠道差异全部收敛在适配器 SPI;异构加解密拆成 <strong>7 层正交策略</strong>,新渠道接入从&quot;改核心&quot;降为&quot;配置+实现类+契约测试&quot;</li>
+<li><strong>稳定性攻坚</strong>:撞库雪崩(缺索引+超时重试正反馈)平均耗时 <strong>6.6s→264ms(25x)</strong>;进件超时(GC 冻结 26s)同路径 <strong>29.5s→2.5s</strong>;下游扇出共享有界线程池+CallerRunsPolicy 背压+单渠道熔断器</li>
+<li><strong>资金正确性架构</strong>:互斥锁防双推资损(Lua CAS)、Transactional Outbox 可靠投递、授信终态双路径统一 CAS 出口(SUCCESS 可翻 FAILED、FAILED 不回退)</li>
+<li><strong>治理体系</strong>:发布门禁(逐台摘流/双身份校验/全量回滚点)、事故复盘制度化;全量报文入 ClickHouse,trace_id 全链路定位,ERROR 巡检告警</li>
+<li>技术栈:Spring Boot、MyBatis-Plus、MySQL 8、Redis、ClickHouse、XXL-JOB、Docker/K8s</li>
+</ul>
+<div class="item"><span>企业级 LLM 网关与长时记忆 ｜ 同司 AI 基建 · 主导</span><span class="date">2026.07-至今</span></div>
+<ul>
+<li><strong>LLM 网关</strong>:统一多供应商接入、语义档位路由(换厂商不改代码)、流式透传、token 用量与成本计量;请求路径三处同步阻塞系统性治理,端到端 <strong>30.1s→3.6s</strong>;看门狗自愈+蓝绿双实例零断流</li>
+<li><strong>长时记忆系统</strong>:事件溯源架构(纯追加 SSOT+ReplacingMergeTree 投影);召回三代演进到词法+向量双臂 RRF 融合+强命中保护,<strong>P@1 0.45→0.907</strong>;热 Redis 冷 CK 分层、双机增量同步、每日零-token 自检</li>
+<li><strong>多租户配额与密钥隔离</strong>;Singleflight 缓存击穿防护(SETNX+Lua);MCP 封装共享记忆底座</li>
+</ul>
+<div class="item"><span>AI 工程化平台 ｜ 个人技术基建 · 独立搭建</span><span class="date">2024 起</span></div>
+<p>覆盖编码→评审→测试→发布→运维全链路的 AI 基础设施:自治研发流水线(FSM 编排+异构双模型验收门)、代码质量判官(确定性规则+证据链核验)、生产发布 SHA 门禁(双写留痕)、Hook 插件体系;支撑贷超与量化两个生产系统的 AI 主导交付,十余次事故沉淀为制度化质量门禁与回滚体系。</p>
+<div class="item"><span>A 股量化系统 ｜ 独立自建(Qlib 深度工程化重构)</span><span class="date">2025.12-2026.06</span></div>
+<p>404 张表 ClickHouse 数据底座、67 条采集管道、273 个调度任务日终编排;撮合引擎四层架构重构(Engine/OrderBook/Registry/DataSource);上线三硬闸(DSR 显著性+PBO 过拟合+ΔIC),实测拦截 Sharpe 虚高 2.2x 的模型上线。</p>
+<div class="item"><span>消费金融核心链路 ｜ 小象优品 · Java 资深开发</span><span class="date">2021.12-2025.11</span></div>
+<ul>
+<li>5+ 资产方与多家银行/消金/担保资金方接入架构:统一参数校验、协议转换、加解密、mock 联调;多笔扣款时序、分布式锁、MQ 顺序消费治理</li>
+<li>团队收缩后留守核心,负责攻坚与新人带教</li>
+</ul>
+<div class="item"><span>EOS 运营中台 ｜ 豌豆思维 · Java 高级开发</span><span class="date">2020.11-2021.11</span></div>
+<p>外呼系统重构(多级限流:Redis 分布式限频+Guava 兜底);亿级通话记录分表;ES 2 亿+微信/1 亿+通话近实时查询;质检 T+1→1h。</p>
+<div class="item"><span>汽车金融租赁平台 ｜ 盛大汽车 · Java 高级开发</span><span class="date">2018.07-2020.05</span></div>
+<p>日订单 100 万+、月流水 1 亿+:老系统微服务拆分(研发效率×2)、银行对账 -50%、存储过程 Java 化×2。</p>
+<div class="item"><span>早期 ｜ 上海广升 / 上海致宇 · Java 开发</span><span class="date">2016.07-2018.07</span></div>
+<p>消息推送平台(日活千万级)、银行资管系统。</p>
+<h2>教育</h2>
+<ul>
+<li>史蒂文斯理工学院 计算机科学 硕士(在读,AI 方向,2025.09-2027.06);徐州工程学院 计算机科学与技术 本科(统招全日制,2012.09-2016.06)</li>
+<li>阿里云大模型 ACP(2026.04)· 上海市人工智能训练师三级(2025.09)</li>
+</ul>
+</section><section class="resume" data-k="资深后端开发" style="display:none">
+<h1>张建乐</h1>
+<p class="title">资深后端开发工程师 · 金融核心系统</p>
+<p class="contact">电话 15221599617 · 邮箱 zhangjianle617@163.com · 可随时到岗</p>
+<div class="band"><strong>10 年</strong>后端工程 · <strong>6 年</strong>金融核心系统(资产/资金/导流三端) ｜ 京东/360/百融等 <strong>5+ 资产方</strong>接入 · 日订单 <strong>100 万+</strong> · <strong>亿级</strong>分表 · 生产攻坚提速 <strong>25x/12x</strong> ｜ 近 3 年 AI 工程化,以 AI 为主力交付生产系统</div>
+<p class="summary">10 年后端,6 年金融生产系统:消费金融贷前贷中贷后全链路、资产端与资金端双边对接、贷超导流平台从 0 到 1;擅长高并发链路、分布式一致性与稳定性攻坚。近 3 年把 AI 组织进研发流水线,以 AI 为主力交付真实生产系统。</p>
+<h2>核心能力</h2>
+<ul>
+<li><strong>后端与架构</strong>:Java(Spring Boot/Cloud、MyBatis-Plus、JUC)、微服务拆分与重构、中台化、状态机与终态保护、分布式锁与幂等、最终一致性</li>
+<li><strong>高并发与海量数据</strong>:MySQL 8 分库分表、Sharding-JDBC、Redis、Kafka/RabbitMQ、Elasticsearch(2 亿+记录近实时)、ClickHouse、XXL-JOB</li>
+<li><strong>稳定性与排障</strong>:JVM/GC 调优、链路排障(慢 SQL/连接池/Threads_running)、雪崩根因治理、进程冻结治理、发布体系(逐台摘流/全量回滚点)</li>
+<li><strong>金融正确性</strong>:上下游双向对账、扣款时序与回写、互斥锁防双推资损、Transactional Outbox 可靠投递、PII 加密与报文验签</li>
+<li><strong>AI 工程化(加分)</strong>:LLM 网关、长时记忆、AI 研发流水线;以 AI 为主力完成生产系统的设计/开发/测试/运维</li>
+</ul>
+<h2>项目经历</h2>
+<div class="item"><span>金融导流平台(双产品线) ｜ 重庆智识维度 · 技术负责人</span><span class="date">2026.06-至今</span></div>
+<p>双产品线贷超导流生产系统:上游多源流量 → 撞库去重 → 进件前筛 → 路由多家资方 → 授信/放款回传 → 双向对账;AI-Native 交付模式。</p>
+<ul>
+<li>撞库雪崩根因治理(缺索引+超时重试正反馈放大,Threads_running=48):平均耗时 <strong>6.6s→264ms(25x)</strong>,在途峰值 72.9→3.24</li>
+<li>下游进件超时治理(SerialGC+swap 冻结 26s):同路径 <strong>29.5s→2.5s</strong>;扇出共享有界线程池+CallerRunsPolicy 背压+单渠道熔断器</li>
+<li>资金正确性:互斥锁防双推资损(Lua CAS)、Transactional Outbox 可靠投递、授信终态双路径统一 CAS 出口(迟到回写不翻转)</li>
+<li>全量报文/日志/事件入 ClickHouse(千万行级),trace_id 全链路定位;ERROR 级巡检+飞书告警收口</li>
+<li>技术栈:Spring Boot、MyBatis-Plus、MySQL 8、Redis、ClickHouse、XXL-JOB、Docker/K8s</li>
+</ul>
+<div class="item"><span>消费金融核心链路 ｜ 小象优品 · Java 资深开发</span><span class="date">2021.12-2025.11</span></div>
+<p>贷前/贷中/贷后全流程,资产端/资金端双边对接,含消费分期与电商交易复合场景。</p>
+<ul>
+<li>承接京东/360/百融/分期乐/哈啰等 <strong>5+ 资产方</strong>与多家银行/消金/担保资金方接入,统一参数校验、协议转换、加解密与 mock 联调</li>
+<li>多笔扣款并发时序与结果回写治理保障资金最终一致;解决长连接不稳定、分布式锁释放异常、MQ 顺序消费失效等线上顽疾</li>
+<li>支撑高峰数百并发进件/还款通知,治理万级订单批量推送 OOM;团队收缩后留守核心,负责攻坚与新人带教</li>
+<li>后期转向 AI 工程化实践,将 AI 编码工具链与质量门禁融入日常交付</li>
+</ul>
+<div class="item"><span>EOS 运营中台 ｜ 豌豆思维 · Java 高级开发</span><span class="date">2020.11-2021.11</span></div>
+<p>外呼系统重构支撑数千销售并发(Redis 分布式限频+Guava 单机兜底);Sharding-JDBC 亿级通话记录按月分表(自定义双分片);ES 支撑 <strong>2 亿+微信记录 / 1 亿+通话记录</strong>近实时查询;质检延迟 <strong>T+1→1h</strong>;Prometheus/Grafana/SkyWalking 排障闭环。</p>
+<div class="item"><span>汽车金融租赁平台 ｜ 盛大汽车 · Java 高级开发</span><span class="date">2018.07-2020.05</span></div>
+<p><strong>日订单 100 万+、月流水 1 亿+</strong>:融资租赁老系统微服务拆分(研发效率×2);银行对账文件延迟 -50%;存储过程 Java 化扣款生成效率×2;银联扣款/自动回盘;Redis 分布式锁解银行通知幂等。</p>
+<div class="item"><span>早期 ｜ 上海广升 / 上海致宇 · Java 开发</span><span class="date">2016.07-2018.07</span></div>
+<p>消息推送平台(日活千万级)、银行资管系统。</p>
+<h2>同司 AI 基建(2026.07-至今,加分项)</h2>
+<p>LLM 网关(多供应商/档位路由/成本计量,端到端 <strong>30.1s→3.6s</strong>)与长时记忆系统(双臂召回 RRF,<strong>P@1 0.907</strong>)支撑业务 AI 能力;AI 研发流水线(质量判官/发布硬闸)支撑两个生产系统交付。</p>
+<h2>教育</h2>
+<ul>
+<li>史蒂文斯理工学院 计算机科学 硕士(在读,AI 方向,2025.09-2027.06);徐州工程学院 计算机科学与技术 本科(统招全日制,2012.09-2016.06)</li>
+<li>阿里云大模型 ACP(2026.04)· 上海市人工智能训练师三级(2025.09)</li>
+</ul>
+</section>
+<div class="dl">下载 PDF:<a href="张建乐-AI架构师-10年-20261002.pdf">AI 架构师</a><a href="张建乐-AI工程化-10年-20261002.pdf">AI 工程化</a><a href="张建乐-大模型应用开发-10年-20261002.pdf">大模型应用开发</a><a href="张建乐-系统架构师-10年-20261002.pdf">系统架构师</a><a href="张建乐-资深后端开发-10年-20261002.pdf">资深后端开发</a></div>
+</div>
+<script>
+document.querySelectorAll('.tabs button').forEach(function(b){
+  b.onclick=function(){
+    document.querySelectorAll('.tabs button').forEach(function(x){x.classList.toggle('on',x===b);});
+    document.querySelectorAll('.resume').forEach(function(s){s.style.display=(s.dataset.k===b.dataset.t)?'block':'none';});
+    window.scrollTo(0,0);
+  };
+});
+</script>
+</body></html>
