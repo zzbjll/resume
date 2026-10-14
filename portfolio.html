@@ -83,6 +83,13 @@ footer a{color:var(--navy);}
 
 <details><summary>问题 → 做法 → 结果</summary><ul class="hl"></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>口径 —— 弹药库/评审-量化平台(个人研究系统,未实盘)</li><li>规模数字回代码实测(2026-10-14):303 张表 = 第一方 .py 里 CREATE TABLE 去重(351 条语句,排除 tests/attic/docs/归档/venv);67 = tools/sync_*.py 计数;314 = config/cron/*.yaml 顶层条目;四层架构见 tools/trading/match_engine/__init__.py:3;2.29 亿行 / 82× 见 datalayer/ch/ddl/market_minute.py:26-29;908 万行 / 14ms 见 datalayer/ch/ddl/views.py:48-51</li><li>口径虚高数字回代码核实(2026-10-14):stacking -81%→-33% / 6.4→2.9 见 tools/lib/stats.py:139-146(overlap_aware_metrics);OLD_4 h5 2.37→~1.0 见 tools/lib/stats.py:35-41;三闸实现 deflated_sharpe 见 stats.py:65(Bailey &amp; López de Prado 2014)、pbo_cscv 见 stats.py:181(CSCV)、ΔIC 合取规则见 tools/agents/ensemble_ablation/runner.py:7,124。⚠️ 历史稿「Sharpe 2.37 / 回撤 -85% → 1.07 / -30%」把两个独立案例混成一条(-85%/-30% 查无出处),已按源码重写</li></ul></details>
+</article><article class="card">
+<header><h3>LLM 微调实践(轨迹 SFT / LoRA)</h3><span class="meta">个人实践 · 独立完成 · 2026</span></header>
+<p class="tagline">轨迹数据构造 → LoRA 微调 → 三维度评测,量化出小模型的能力边界</p>
+<div class="chips"></div>
+
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"></ul></details>
+<details><summary>证据(可核验)</summary><ul class="ev"><li>工程与数据 —— train_project(11 个脚本 + 1140 条轨迹数据 + 三维度评测报告);超参回代码核实:scripts/02_train.py:55-68(max_length 8192 / batch 1 / accum 8 / 3 epoch / lr 2e-5 / r=16 / α=32)、:131(7 个 target modules)、:150-151(cosine + warmup_ratio 0.1)</li><li>评测数字 —— reports/training_before_after_summary.md(格式 4/20→20/20、工具选择 0/10→2/10、答案正确 0/10→2/10、完整度 0%→17%)</li></ul></details>
 </article>
 <footer>本页由 facts.yaml 生成(v21-20261014);改源不改稿。
 <a href="https://zzbjll.github.io/resume">完整简历 ↗</a></footer>
