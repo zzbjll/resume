@@ -49,33 +49,40 @@ footer a{color:var(--navy);}
 <div class="track"><span><b>2024.06</b>Agent 应用层:意图路由 / 工具编排 / 幻觉守门</span><span><b>2026.07</b>AI 基建层:LLM 网关 / 长时记忆 / 多租户</span><span><b>2026.10</b>多模态产品层:生成质量可量化 / 合规上线</span></div>
 <h2>项目</h2>
 <article class="card">
-<header><h3>假发 AI 试戴</h3><span class="meta">独立作品(自有业务线) · 设计 + 开发 + 上线 独立完成 · 2026.10</span></header>
-<p class="tagline">不换脸管线 —— 只换发型,脸 / 身体 / 背景保持原照片像素</p>
-<div class="chips"><span class="chip"><b>48.0s</b> 端到端<i>公网真跑</i></span><span class="chip"><b>5 / 8</b> 脸区像素差 P99<i>对照(仅提示词) 33</i></span><span class="chip"><b>0.975 / 0.958</b> 身份相似度 cos<i>对照 0.918</i></span><span class="chip"><b>85s → 14.7s</b> 后处理耗时<i>本地 ONNX CPU</i></span></div>
-<div class="links"><a href="https://wig.cqzswd.com/" target="_blank" rel="noopener">在线 Demo ↗</a><span class="locked" title="https://github.com/zzbjll/wig-ai-tryon">代码仓库(私有,可授权查看)</span><span class="locked" title="https://github.com/zzbjll/wig-ai-tryon/blob/main/docs/serving.md">技术文档(私有,可授权查看)</span></div>
-<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:模型整图重画,脸会漂移(提示词级约束不可靠)</span><span class="a">做法:补边 → ARK 生成 → 裁回 → 蒙版并集 → ViTMatte 发丝级 alpha → Image.composite 合成</span><span class="r">结果:脸区像素差降到 JPEG 噪声级,脸=原图像素</span></li><li><span class="q">问题:发缘残留旧发 / 晕影</span><span class="a">做法:蒙版取「原图旧发羽化区 ∪ 生成图新发 alpha」,并集 + matting</span><span class="r">结果:长→短换发无残留,发缘干净</span></li><li><span class="q">问题:后处理拖慢端到端</span><span class="a">做法:分割 512→256、matting 512→384(3× 放大目检无差)</span><span class="r">结果:本地后处理 85s → 14.7s</span></li></ul></details>
-<details><summary>证据(可核验)</summary><ul class="ev"><li>指标与复跑命令 —— eval/report.md(本地零 API 花费可复跑)</li><li>接口 / 部署 / 性能口径 —— docs/serving.md</li><li>失败模式归因(数据 / 模型 / 提示词 / 后处理)—— docs/failure-analysis.md</li></ul></details>
+<header><h3>企业级 LLM 网关与长时记忆</h3><span class="meta">同司 AI 基建 · 主导 · 2026.07-至今</span></header>
+<p class="tagline">多厂商网关(换厂商不改代码)+ 长时记忆(事件溯源 + 双臂召回)</p>
+<div class="chips"><span class="chip"><b>30.1s → 3.6s</b> 网关端到端<i>分段计时定位</i></span><span class="chip"><b>0.853 → 0.907</b> 记忆 P@1<i>n=75 同口径 A/B</i></span><span class="chip"><b>-60%</b> 单会话成本<i>档位路由</i></span><span class="chip"><b>5 厂商 / 12 模型</b> 在线规模<i>9 客户端 · 51 天实测</i></span></div>
+
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:网关端到端 30s,端到端测不出瓶颈在哪</span><span class="a">做法:请求路径分段计时,定位到 CK 建连 + DDL 约 120ms 卡在异步事件循环</span><span class="r">结果:全异步化 + 连接池 + 用量写库转有界队列后台落库 → 30.1s → 3.6s</span></li><li><span class="q">问题:向量召回单臂不够,凭直觉加 cross-encoder 重排</span><span class="a">做法:同口径 A/B 实测:重排 R@4 0.797 → 0.707 是负贡献;双臂 RRF 融合才是正解</span><span class="r">结果:关停重排,P@1 0.853 → 0.907;并量化评测工具自身 16.3% 翻面噪声</span></li><li><span class="q">问题:多厂商 API 各自为政,换家要改代码;一家挂了整条断</span><span class="a">做法:语义档位路由(轻 / 重模型)+ 链式换家(防同账号互切)+ 线程本地连接与代次失效重建</span><span class="r">结果:换厂商不改代码,单会话成本 -60%;51 天 5 厂商 12 模型 9 客户端稳定运行</span></li></ul></details>
+<details><summary>证据(可核验)</summary><ul class="ev"><li>性能与召回口径 —— 弹药库/评审-贷超与AI基建(分段计时 TSV、gate_rerank 改造)</li><li>P@1 基线以 n=75 同口径 A/B 为准;历史稿的 0.45 基线查无出处,已弃用</li><li>机制 —— 回代码核实:gateway.py:105-162(异步转发 + SSE usage 解析)、gw_usage.py:61-111(队列 + 后台线程 + 三写)、gw_providers.py:31-44(档位路由)、gw_failover.py:15-28(链式换家)、deploy.sh:29-110(滚动替换 + 发布闸)、ce_rerank.py:19(重排实测负贡献关停)、recall_core.py:39-123(RRF + 强命中保护)</li></ul></details>
 </article><article class="card">
 <header><h3>金融智能问答 Agent 平台</h3><span class="meta">小象优品 · 核心开发(3-5 人) · 2024.06-2025.11</span></header>
 <p class="tagline">plan-execute 编排 + 权限闸 + 三层幻觉守门,内部与外部双入口</p>
-<div class="chips"><span class="chip"><b>70% → 90%</b> 意图识别<i>45 条种子 case 评测集</i></span><span class="chip"><b>-60%</b> 单会话成本<i>档位路由(轻/重模型),按单价×用量可推导</i></span><span class="chip"><b>54 passed</b> 回归测试<i>本地单测(2026-10-14)</i></span></div>
+<div class="chips"></div>
 
-<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:规则基线误路由偏高,答非所问</span><span class="a">做法:意图路由 + 澄清策略 + 连续澄清 3 次自动转人工</span><span class="r">结果:意图识别 70% → 90%(45 条种子 case 评测)</span></li><li><span class="q">问题:工具失败被吞成「未命中模板」,错误不可见</span><span class="a">做法:工具失败统一出口透传错误 + route=error,API 层状态跟路由走</span><span class="r">结果:失败可观测,不再静默兜底</span></li><li><span class="q">问题:编造与越权风险</span><span class="a">做法:三层幻觉守门 + 内/外/用户三级可见性 + 审计脱敏</span><span class="r">结果:生产可用</span></li></ul></details>
-<details><summary>证据(可核验)</summary><ul class="ev"><li>评测口径与样本量 —— 弹药库/面试分层应答(70→90% 口径)</li><li>回归测试 —— pytest tests/(54 passed,含澄清连击转人工与工具失败 error 两条新回归)</li></ul></details>
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"></ul></details>
+<details><summary>证据(可核验)</summary><ul class="ev"><li>评测口径与样本量 —— 弹药库/面试分层应答(70→90% 口径;1,200+ 为累计标注口径,不主动报)</li><li>13 条约束 —— 回代码核实:llm_client.py:24-44(业务 8 条 + 知识 5 条)</li><li>回归测试 —— pytest tests/(54 passed)</li></ul></details>
 </article><article class="card">
-<header><h3>企业级 LLM 网关与长时记忆</h3><span class="meta">同司 AI 基建 · 主导 · 2026.07-至今</span></header>
-<p class="tagline">多厂商网关(换厂商不改代码)+ 长时记忆(事件溯源 + 双臂召回)</p>
-<div class="chips"><span class="chip"><b>30.1s → 3.6s</b> 网关端到端<i>两个独立根因,分段计时定位</i></span><span class="chip"><b>0.853 → 0.907</b> 记忆 P@1<i>n=75 同口径 A/B</i></span><span class="chip"><b>-60%</b> 单会话成本<i>档位路由(轻/重模型),按单价×用量可推导</i></span></div>
-
-<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:请求路径三处同步阻塞,端到端 30s 级</span><span class="a">做法:全异步化 + 连接池 + 用量写库转后台队列</span><span class="r">结果:端到端 30.1s → 3.6s(分段计时才定位到写库那 120ms)</span></li><li><span class="q">问题:单臂向量召回不足</span><span class="a">做法:事件溯源(纯追加 SSOT + 投影)+ 词法/向量双臂 RRF 融合 + 强命中保护</span><span class="r">结果:P@1 0.853 → 0.907(n=75 同口径 A/B)</span></li><li><span class="q">问题:多租户与成本失控风险</span><span class="a">做法:语义档位路由(轻/重模型)+ 配额与密钥隔离 + 蓝绿零断流</span><span class="r">结果:单会话成本 -60%</span></li></ul></details>
-<details><summary>证据(可核验)</summary><ul class="ev"><li>性能与召回口径 —— 弹药库/评审-贷超与AI基建(分段计时 TSV、gate_rerank 改造)</li><li>P@1 基线以 n=75 同口径 A/B 为准;历史稿的 0.45 基线查无出处,已弃用</li></ul></details>
+<header><h3>假发 AI 试戴(在线作品)</h3><span class="meta">独立作品 · 自有业务线 · 设计 + 开发 + 上线 独立完成 · 2026.10</span></header>
+<p class="tagline">不换脸管线 —— 只换发型,脸 / 身体 / 背景保持原照片像素</p>
+<div class="chips"><span class="chip"><b>48.0s</b> 端到端<i>公网真跑</i></span><span class="chip"><b>5 / 8</b> 脸区像素差 P99<i>对照(仅提示词) 33</i></span><span class="chip"><b>0.975 / 0.958</b> 身份相似度 cos<i>对照 0.918</i></span><span class="chip"><b>85s → 14.7s</b> 后处理耗时<i>本地 ONNX CPU</i></span></div>
+<div class="links"><a href="https://wig.cqzswd.com/" target="_blank" rel="noopener">在线 Demo ↗</a><span class="locked" title="https://github.com/zzbjll/wig-ai-tryon">代码仓库(私有,可授权查看)</span><span class="locked" title="https://github.com/zzbjll/wig-ai-tryon/blob/main/docs/serving.md">技术文档(私有,可授权查看)</span></div>
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:模型整图重画,脸会漂移;靠提示词约束不可靠</span><span class="a">做法:补边成 3:4 → 生成 → 裁回与原图逐像素对位 → 蒙版取「原图旧发区 ∪ 生成图新发 alpha」→ Image.composite 合成</span><span class="r">结果:脸区像素差 P99 5~8(对照 33),身份 cos 0.958~0.975(对照 0.894~0.918)—— 脸就是原照片像素</span></li><li><span class="q">问题:长 → 短换发后旧发残留晕影</span><span class="a">做法:蒙版并集 + ViTMatte 发丝级 alpha(分割定前景 / 背景核心,边缘带由 matting 逐像素判)</span><span class="r">结果:发缘干净,长 → 短无旧发残留</span></li><li><span class="q">问题:后处理 85s,拖慢出图体验</span><span class="a">做法:分割 512 → 256、matting 512 → 384(3x 放大逐区对照过视觉无差)</span><span class="r">结果:后处理 14.7s,公网端到端 48.0s;瓶颈只剩模型生成约 30s</span></li></ul></details>
+<details><summary>证据(可核验)</summary><ul class="ev"><li>指标与复跑命令 —— eval/report.md(本地零 API 花费可复跑);评测样本 4 对(服务器真实流量按 usage.log 自动成对归档,随流量增长)</li><li>接口 / 部署 / 性能口径 —— docs/serving.md;失败归因 —— docs/failure-analysis.md</li><li>机制 —— 回代码核实:face_lock.py:35-45(蒙版并集合成 + matting 失败退回羽化 mask 不中断)、hairmatte.py:41(trimap → ViTMatte)、server.py:30(并发闸 6 = 成本闸)、marker.py(显式角标 + EXIF/COM 隐式标识)</li></ul></details>
 </article><article class="card">
 <header><h3>金融导流平台(双产品线)</h3><span class="meta">重庆智识维度 · 技术负责人 · 2026.06-至今</span></header>
 <p class="tagline">上游流量 → 撞库 → 前筛 → 路由资方 → 授信 / 放款 → 双向对账,已上生产</p>
-<div class="chips"><span class="chip"><b>6.6s → 264ms</b> 撞库平均耗时<i>生产,同窗口 18.5 分钟 A/B</i></span><span class="chip"><b>29.5s → 2.5s</b> 进件耗时<i>ZQX test 环境,同路径(非生产事故)</i></span><span class="chip"><b>生产运行</b> 状态<i>公司资产,仅脱敏口径</i></span></div>
+<div class="chips"><span class="chip"><b>6.6s → 264ms</b> 撞库平均耗时<i>生产同窗口 A/B</i></span><span class="chip"><b>29.5s → 2.5s</b> 下游进件超时<i>ZQX test 同路径</i></span><span class="chip"><b>配置 + 实现类</b> 新渠道接入<i>核心域零改动</i></span></div>
 
-<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:生产撞库雪崩(缺索引 + 超时重试正反馈)</span><span class="a">做法:索引 + 超时治理 + 熔断</span><span class="r">结果:6.6s → 264ms(25×)</span></li><li><span class="q">问题:下游进件超时(GC 冻结)</span><span class="a">做法:参数与 GC 调优 + 终态保护</span><span class="r">结果:29.5s → 2.5s</span></li><li><span class="q">问题:N×M 渠道/资方集成持续扩散</span><span class="a">做法:防腐层 ACL + 适配器 SPI + 7 层正交加解密策略</span><span class="r">结果:新渠道 = 配置 + 实现类 + 契约测试</span></li></ul></details>
-<details><summary>证据(可核验)</summary><ul class="ev"><li>生产口径与排查记录 —— 弹药库(脱敏;代码与截图不对外)</li></ul></details>
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:生产撞库雪崩:缺索引叠加超时重试正反馈,越慢越重试</span><span class="a">做法:索引 + 超时治理 + 三层弹性(有界池背压 / 每渠道熔断半开探测 / 线程池饱和回压)</span><span class="r">结果:平均耗时 6.6s → 264ms,峰值在途 72.9 → 3.24</span></li><li><span class="q">问题:渠道与资方差异持续扩散,N×M 手工适配改一处崩一片</span><span class="a">做法:核心域只认 13 类 Canonical 模型,差异收敛进适配器 SPI + 注册表</span><span class="r">结果:接新渠道 = 一条配置 + 一个实现 bean,核心域零改动</span></li><li><span class="q">问题:跨库双写会丢、双实例下日限额超发、账单对不平</span><span class="a">做法:四类 Outbox 至少一次投递 + 行级隔离重投 + DEAD 死信;Redis INCR 原子占额;实时流水 → 日终闭账 → 幂等净补差</span><span class="r">结果:账不平可定位到逐笔流水,改价当天回溯补差、历史留单价快照</span></li></ul></details>
+<details><summary>证据(可核验)</summary><ul class="ev"><li>生产口径与排查记录 —— 弹药库(脱敏;代码与截图不对外)</li><li>机制 —— 回代码核实:DownstreamAdapter.java(SPI)、ChannelAdapterRegistry.java、DownstreamDispatcher.java、DownstreamCircuitBreaker.java、DailyApplyLimiter.java、CkOutbox.java + CkOutboxDrainTask.java、recon/(实时计费 + 日终闭账)</li></ul></details>
+</article><article class="card">
+<header><h3>A 股量化研究系统(个人研究,未实盘)</h3><span class="meta">独立自建 · 独立 · 2025.12-2026.06</span></header>
+<p class="tagline">数据底座 + 撮合重构 + 三道防自欺闸门</p>
+<div class="chips"></div>
+
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"></ul></details>
+<details><summary>证据(可核验)</summary><ul class="ev"><li>口径 —— 弹药库/评审-量化平台(个人研究系统,未实盘)</li></ul></details>
 </article>
 <footer>本页由 facts.yaml 生成(v21-20261014);改源不改稿。
 <a href="https://zzbjll.github.io/resume">完整简历 ↗</a></footer>
