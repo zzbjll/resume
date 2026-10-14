@@ -90,6 +90,34 @@ footer a{color:var(--navy);}
 <div class="links"><span class="locked" title="https://github.com/zzbjll/agent-toolcall-sft">代码仓库(私有,可授权查看)</span></div>
 <details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:小模型能否接住 Agent 工具调用、SFT 能解决哪一层</span><span class="a">做法:合成 1140 条轨迹 + LoRA 微调 + 三维度分离评测(格式 / 选择 / 答案不混成一个分)</span><span class="r">结果:格式 20/20 全学会、工具选择 2/10 学不动 —— 边界量化,指导选型</span></li><li><span class="q">问题:全参微调显存吃紧、单卡跑不动</span><span class="a">做法:DeepSpeed ZeRO-2 切优化器状态与梯度,2 卡跑通;merge_and_unload 合回基座(推理零开销)</span><span class="r">结果:2207 条全参对照跑通,checkpoint 在案</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>工程与数据 —— train_project(11 个脚本 + 1140 条轨迹数据 wc -l 实测 + 三维度评测报告);超参回代码核实:scripts/02_train.py:55-68(max_length 8192 / batch 1 / accum 8 / 3 epoch / lr 2e-5 / r=16 / α=32)、:131(7 个 target modules)、:150-151(cosine + warmup_ratio 0.1);数据校验 6 条规则:src/data/schema_v2.py:195-255(JSON/XML 双格式支持 :221-225);对话拆分 + 末轮加权:Agent+SFT/conversation_splitter.py:1-12;评测集构造:build_before_after_judged_set.py(target-count 10,从训练集经 LLM 评审挑「前后差异明显」样本 —— 评测数字按此口径解读,非泛化评测)</li><li>评测数字 —— reports/training_before_after_summary.md(格式 4/20→20/20、工具选择 0/10→2/10、答案正确 0/10→2/10、完整度 0%→17%)</li><li>全参工程 —— Agent+SFT(README 三路径:LoRA / 合并 / 全参);超参回代码核实:run_train_full_finetune.sh(max_seq 14096 / accum 16 / bf16 / gradient_checkpointing / warmup 0.03)、merge_lora_into_base.py(merge_and_unload + safe_serialization);数据规模实测:merged_train_final_multiturn_v2.json 2207 条</li><li>分布式 —— 第11周工程:train.py(DeepSpeedPlugin zero_stage=2 + gradient_clipping=1.0 + Accelerator)、my_accelerate_config.yaml(distributed_type DEEPSPEED / num_processes 2);真训练产物 trainer_output/checkpoint-471/500/1000/1500/1875 + runs/ + saved_model/</li></ul></details>
+</article><article class="card">
+<header><h3>随方 · 保险渠道接入 AI 工作台(桌面端)</h3><span class="meta">重庆智识维度 · 主导 · 2026.09-至今</span></header>
+<p class="tagline">九阶段自治流水线:文档 → 规格闸 → 代码生成 → 编译 → 用例 → 报文比对 → 上线 → 知识沉淀</p>
+<div class="chips"><span class="chip"><b>545 + 363</b> 测试门禁<i>全绿 · 覆盖 ≥79% 回归闸</i></span><span class="chip"><b>46 文件</b> 代码生成<i>真机落盘</i></span><span class="chip"><b>1ms</b> 知识检索<i>命中</i></span></div>
+
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:AI 生成代码进生产,谁批准、中断怎么恢复</span><span class="a">做法:九阶段流水线:规格 / 产物经人工闸收口;审批挂起即落库(杀进程重启可恢复);签名域 fail-closed</span><span class="r">结果:九阶段全链真机跑通:46 文件落盘、上线链 15/15 对 mock、KR3 定位 100% / 误报 0%</span></li><li><span class="q">问题:渠道接入 4 周级人工:文档人读、适配手写、联调人盯</span><span class="a">做法:文档解析 → LLM 规格抽取 → Tera 模板代码生成 → mvn 编译闭环 → 五类用例 → 报文比对 → 上线六步链 → 知识沉淀</span><span class="r">结果:覆盖率实测 79.83% 定 ≥79% 回归闸;前端 545 + Rust 363 测试全绿</span></li></ul></details>
+<details><summary>证据(可核验)</summary><ul class="ev"><li>门禁与规模 —— 本轮实测(2026-10-14,HEAD e37664c):vitest 545 通过 / 5 跳过;cargo test --lib 363 通过 / 16 ignored;ci.yml 覆盖率 ≥79% 闸(cargo-llvm-cov,实测 79.83%);Rust 359 文件 / 4.1 万行 + 前端 319 文件 / 3.8 万行;148 条 IPC 命令统一 handler</li><li>九阶段真机数据 —— 2026-10-05 全链走查(46 文件 / 15/15 对 mock / 1ms / KR3 50/50);docs/acceptance/D075-D079(彩排 / 打包 / 签名公证 / 稳定性验收)</li><li>机制 —— 回代码核实:pipeline/guard.rs(阶段完成守卫)、permission.rs(审批挂起落库)、codegen/render/context.rs(签名域 fail-closed)、mocksrv.rs(进程内 mock)、knowledge/index.rs(tantivy 检索)</li></ul></details>
+</article><article class="card">
+<header><h3>自治 AI 员工系统(排班值班 + 评审门)</h3><span class="meta">自主创业 · 独立开发 · 2026.04-至今</span></header>
+<p class="tagline">排班 → 自主值班 → 安全闸 → 双模型评审门:让 AI 7×24 干活且可控</p>
+<div class="chips"><span class="chip"><b>489 班</b> 自主值班<i>每 30 分钟一班</i></span><span class="chip"><b>双 PASS 放行</b> 评审门<i>2026-06-14 v1 上线</i></span></div>
+
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:AI 自主干活不可控:幻觉乱改、越权、交付无法追责</span><span class="a">做法:排班 + 自治值班 + 安全闸 Hook 拦危险操作 + 双 LLM 异构评审门(涉钱改动双 PASS 才放行)</span><span class="r">结果:自主值班 489 班;涉钱改动 2026-06-14 起双模型点头;记忆湖事件溯源 4500+ 条</span></li></ul></details>
+<details><summary>证据(可核验)</summary><ul class="ev"><li>值班与门禁 —— 物证:.claude/night_tasks/autodev_shift_*.log(489 个班次日志);CK stock.autodev_ship_verdict(gate_version v1-20260614);MULTIPROJECT_DESIGN.md</li><li>记忆湖 —— CK memory_events 事件表(2026-06-06 起;4514 条,2026-10-10 实测)</li></ul></details>
+</article><article class="card">
+<header><h3>多模态 RAG 工程(图片语境化 + 在线自评)</h3><span class="meta">独立作品 · 独立完成 · 2025.12-2026.06</span></header>
+<p class="tagline">dots-OCR 版面解析 → 图片语境化入库 → Milvus 双路检索 → LangGraph 10 节点 + RAGAS 在线自评</p>
+<div class="chips"><span class="chip"><b>约 2.8k 行</b> 核心自研<i>37 py / 5222 行总</i></span><span class="chip"><b>10 节点</b> 工作流<i>LangGraph 状态图</i></span></div>
+
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:PDF 图片检索不到:图与文本不在同一语义空间</span><span class="a">做法:qwen3-vl 取图前后文生成 ≤300 字描述再向量化,图文共用稠密空间;Milvus 单集合 dense + 服务端 BM25 双路融合</span><span class="r">结果:纯文本查询可召回图片;省掉自建 BM25 索引与一致性维护</span></li><li><span class="q">问题:RAG 答错无人拦</span><span class="a">做法:RAGAS 当流程节点:检索侧相关性不达标丢弃上下文;生成侧 &lt;0.7 触发人工审批,拒则联网兜底</span><span class="r">结果:低分不重生成而换信息源(方向错时重生成只烧 token)</span></li></ul></details>
+<details><summary>证据(可核验)</summary><ul class="ev"><li>代码与行号 —— 弹药库/评审-RAG与DeepResearch.md(A 包,2026-09-08 只读评审:37 py / 5222 行,自研活代码约 2.8k;file:line 实测)</li><li>机制 —— 回代码核实:db_operator.py:114-160(图片语境化)、collections_operator.py:21-50(BM25 服务端)、workflow.py:172-219(10 节点状态图)、tools.py:68 + evaluate_node.py:22(RAGAS 两指标入流程)、embeddings_utils.py:30-69(RPM 限速 + 429 退避)</li></ul></details>
+</article><article class="card">
+<header><h3>DeepResearch 深度研究编排引擎</h3><span class="meta">独立作品 · 独立完成 · 2025.12-2026.06</span></header>
+<p class="tagline">OODA 并行编排 + 终止三保险:把深度研究的无限迭代压成可估成本</p>
+<div class="chips"><span class="chip"><b>4.1k 行 / 9 模块</b> 规模<i>只读评审实测</i></span><span class="chip"><b>上限 6 / 典型 3</b> 并行编排<i>OODA worker</i></span></div>
+
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:深度研究容易无限迭代、成本失控</span><span class="a">做法:终止三保险:迭代上下限(min2 / max5)+ 质量门 80 + 收益递减判停;worker 查询预算按复杂度分配(3 / 5 / 8)</span><span class="r">结果:最坏成本可估;并行上限 6 worker(典型 3)</span></li><li><span class="q">问题:LLM 结构化输出有失败率,失败整轮崩</span><span class="a">做法:extract_json 两级降级;失败返回低置信度骨架并把失败事实写进 limitations,对下游可见</span><span class="r">结果:单 worker 失败不拖垮整轮;报告带置信度标注</span></li></ul></details>
+<details><summary>证据(可核验)</summary><ul class="ev"><li>代码与行号 —— 弹药库/评审-RAG与DeepResearch.md(B 包,2026-09-08 只读评审,file:line 实测);源码在 弹药库/_dr_unzip/deep_research(9 py / 4115 行)</li><li>机制 —— 回代码核实:orchestrator.py:697-849(五阶段)、:759-816(终止三保险)、workers.py:227-274(预算分配)、tools.py:292-320(JSON 降级)、api.py:283-450(FastAPI + SSE)</li></ul></details>
 </article>
 <footer>本页由 facts.yaml 生成(v21-20261014);改源不改稿。
 <a href="https://zzbjll.github.io/resume">完整简历 ↗</a></footer>
