@@ -43,73 +43,73 @@ footer a{color:var(--navy);}
 </style></head><body><div class="page">
 <h1>张建乐</h1>
 <p class="title">AI 应用 · 后端架构</p>
-<p class="tagline">把 AI 落成能扛生产的系统:LLM 网关、Agent 平台、多模态应用都已上线,底座是 10 年后端架构与稳定性治理</p>
+<p class="tagline">把 AI 落成能扛生产的系统 —— LLM 网关 / Agent 平台 / 多模态应用均已上线;底座是 10 年后端架构与稳定性治理</p>
 <p class="contact">电话 15221599617 · 邮箱 zhangjianle617@163.com · <a href="https://zzbjll.github.io/resume">https://zzbjll.github.io/resume</a></p>
 <div class="digits"><div class="digit"><b>10 年</b>后端与架构</div><div class="digit"><b>近 3 年</b>AI 应用落地</div><div class="digit"><b>三次</b>0-1 生产系统</div><div class="digit"><b>6.6s → 264ms</b>稳定性治理</div></div>
-<div class="track"><span><b>2024.06</b>Agent 应用层:意图路由、工具编排、幻觉守门</span><span><b>2026.07</b>AI 基建层:LLM 网关、长时记忆、多租户</span><span><b>2026.10</b>多模态产品层:生成质量可量化、合规上线</span></div>
+<div class="track"><span><b>2024.06</b>Agent 应用层:意图路由 / 工具编排 / 幻觉守门</span><span><b>2026.07</b>AI 基建层:LLM 网关 / 长时记忆 / 多租户</span><span><b>2026.10</b>多模态产品层:生成质量可量化 / 合规上线</span></div>
 <h2>项目</h2>
 <article class="card">
 <header><h3>企业级 LLM 网关与长时记忆</h3><span class="meta">同司 AI 基建 · 主导 · 2026.07-至今</span></header>
-<p class="tagline">多厂商 LLM 网关与长时记忆(事件溯源、双臂召回)</p>
+<p class="tagline">多厂商网关(换厂商不改代码)+ 长时记忆(事件溯源 + 双臂召回)</p>
 <div class="chips"><span class="chip"><b>30.1s → 3.6s</b> 网关端到端<i>分段计时定位</i></span><span class="chip"><b>0.853 → 0.907</b> 记忆 P@1<i>n=75 同口径 A/B</i></span><span class="chip"><b>-60%</b> 单会话成本<i>档位路由</i></span><span class="chip"><b>5 厂商 / 12 模型</b> 在线规模<i>9 客户端 · 51 天实测</i></span></div>
 
-<details><summary>展开细节</summary><ul class="hl"><li><span class="q">网关端到端 30s,端到端测不出瓶颈在哪</span><span class="a">请求路径分段计时,定位到 CK 建连 + DDL 约 120ms 卡在异步事件循环</span><span class="r">全异步化 + 连接池 + 用量写库转有界队列后台落库 → 30.1s → 3.6s</span></li><li><span class="q">向量召回单臂不够,凭直觉加 cross-encoder 重排</span><span class="a">同口径 A/B 实测:重排 R@4 0.797 → 0.707 是负贡献;双臂 RRF 融合才是正解</span><span class="r">关停重排,P@1 0.853 → 0.907;并量化评测工具自身 16.3% 翻面噪声</span></li><li><span class="q">多厂商 API 各自为政,换家要改代码;一家挂了整条断</span><span class="a">语义档位路由(轻 / 重模型)+ 链式换家(防同账号互切)+ 线程本地连接与代次失效重建</span><span class="r">换厂商不改代码,单会话成本 -60%;51 天 5 厂商 12 模型 9 客户端稳定运行</span></li></ul></details>
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:网关端到端 30s,端到端测不出瓶颈在哪</span><span class="a">做法:请求路径分段计时,定位到 CK 建连 + DDL 约 120ms 卡在异步事件循环</span><span class="r">结果:全异步化 + 连接池 + 用量写库转有界队列后台落库 → 30.1s → 3.6s</span></li><li><span class="q">问题:向量召回单臂不够,凭直觉加 cross-encoder 重排</span><span class="a">做法:同口径 A/B 实测:重排 R@4 0.797 → 0.707 是负贡献;双臂 RRF 融合才是正解</span><span class="r">结果:关停重排,P@1 0.853 → 0.907;并量化评测工具自身 16.3% 翻面噪声</span></li><li><span class="q">问题:多厂商 API 各自为政,换家要改代码;一家挂了整条断</span><span class="a">做法:语义档位路由(轻 / 重模型)+ 链式换家(防同账号互切)+ 线程本地连接与代次失效重建</span><span class="r">结果:换厂商不改代码,单会话成本 -60%;51 天 5 厂商 12 模型 9 客户端稳定运行</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>性能与召回口径 —— 弹药库/评审-贷超与AI基建(分段计时 TSV、gate_rerank 改造)</li><li>P@1 基线以 n=75 同口径 A/B 为准;历史稿的 0.45 基线查无出处,已弃用</li><li>机制 —— 回代码核实:gateway.py:105-162(异步转发 + SSE usage 解析)、gw_usage.py:61-111(队列 + 后台线程 + 三写)、gw_providers.py:31-44(档位路由)、gw_failover.py:15-28(链式换家)、deploy.sh:29-110(滚动替换 + 发布闸)、ce_rerank.py:19(重排实测负贡献关停)、recall_core.py:39-123(RRF + 强命中保护)</li></ul></details>
 </article><article class="card">
 <header><h3>金融智能问答 Agent 平台</h3><span class="meta">小象优品 · 核心开发(3-5 人) · 2024.06-2025.11</span></header>
-<p class="tagline">内外双入口的金融问答 Agent:plan-execute 编排、权限闸、幻觉守门</p>
+<p class="tagline">plan-execute 编排 + 权限闸 + 三层幻觉守门,内部与外部双入口</p>
 <div class="chips"></div>
 
-<details><summary>展开细节</summary><ul class="hl"></ul></details>
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>评测 —— 回代码核实:docs/tool_eval_dataset.json(45 条)、scripts/run_tool_eval.py(route / tool / combo 三指标)。⚠️ 历史稿「70%→90%」查无产物、复现不出,已删;--fast 模式 matched_tools/matched_combo 在 ef() 里硬编码为 True,不引用其分数</li><li>13 条约束 —— 回代码核实:llm_client.py:24-44(业务 8 条 + 知识 5 条)</li><li>4 条权限闸 —— packages/core/tooling.py:98-112(scope 隔离 / 认证 / 用户 / 高风险显式放行)</li><li>回归测试 —— pytest tests/(54 passed)</li></ul></details>
 </article><article class="card">
 <header><h3>假发 AI 试戴(在线作品)</h3><span class="meta">独立作品 · 自有业务线 · 设计 + 开发 + 上线 独立完成 · 2026.10</span></header>
-<p class="tagline">只换发型不换脸:脸、身体、背景保持原照片像素</p>
+<p class="tagline">不换脸管线 —— 只换发型,脸 / 身体 / 背景保持原照片像素</p>
 <div class="chips"><span class="chip"><b>48.0s</b> 端到端<i>公网真跑</i></span><span class="chip"><b>5 / 8</b> 脸区像素差 P99<i>对照(仅提示词) 33</i></span><span class="chip"><b>0.975 / 0.958</b> 身份相似度 cos<i>对照 0.918</i></span><span class="chip"><b>85s → 14.7s</b> 后处理耗时<i>本地 ONNX CPU</i></span></div>
 <div class="links"><a href="https://wig.cqzswd.com/" target="_blank" rel="noopener">在线 Demo ↗</a><span class="locked" title="https://github.com/zzbjll/wig-ai-tryon">代码仓库(私有,可授权查看)</span><span class="locked" title="https://github.com/zzbjll/wig-ai-tryon/blob/main/docs/serving.md">技术文档(私有,可授权查看)</span></div>
-<details><summary>展开细节</summary><ul class="hl"><li><span class="q">模型整图重画,脸会漂移;靠提示词约束不可靠</span><span class="a">补边成 3:4 → 生成 → 裁回与原图逐像素对位 → 蒙版取「原图旧发区 ∪ 生成图新发 alpha」→ Image.composite 合成</span><span class="r">脸区像素差 P99 5~8(对照 33),身份 cos 0.958~0.975(对照 0.894~0.918)—— 脸就是原照片像素</span></li><li><span class="q">长 → 短换发后旧发残留晕影</span><span class="a">蒙版并集 + ViTMatte 发丝级 alpha(分割定前景 / 背景核心,边缘带由 matting 逐像素判)</span><span class="r">发缘干净,长 → 短无旧发残留</span></li><li><span class="q">后处理 85s,拖慢出图体验</span><span class="a">分割 512 → 256、matting 512 → 384(3x 放大逐区对照过视觉无差)</span><span class="r">后处理 14.7s,公网端到端 48.0s;瓶颈只剩模型生成约 30s</span></li></ul></details>
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:模型整图重画,脸会漂移;靠提示词约束不可靠</span><span class="a">做法:补边成 3:4 → 生成 → 裁回与原图逐像素对位 → 蒙版取「原图旧发区 ∪ 生成图新发 alpha」→ Image.composite 合成</span><span class="r">结果:脸区像素差 P99 5~8(对照 33),身份 cos 0.958~0.975(对照 0.894~0.918)—— 脸就是原照片像素</span></li><li><span class="q">问题:长 → 短换发后旧发残留晕影</span><span class="a">做法:蒙版并集 + ViTMatte 发丝级 alpha(分割定前景 / 背景核心,边缘带由 matting 逐像素判)</span><span class="r">结果:发缘干净,长 → 短无旧发残留</span></li><li><span class="q">问题:后处理 85s,拖慢出图体验</span><span class="a">做法:分割 512 → 256、matting 512 → 384(3x 放大逐区对照过视觉无差)</span><span class="r">结果:后处理 14.7s,公网端到端 48.0s;瓶颈只剩模型生成约 30s</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>指标与复跑命令 —— eval/report.md(本地零 API 花费可复跑);评测样本 4 对(服务器真实流量按 usage.log 自动成对归档,随流量增长)</li><li>接口 / 部署 / 性能口径 —— docs/serving.md;失败归因 —— docs/failure-analysis.md</li><li>机制 —— 回代码核实:face_lock.py:35-45(蒙版并集合成 + matting 失败退回羽化 mask 不中断)、hairmatte.py:41(trimap → ViTMatte)、server.py:30(并发闸 6 = 成本闸)、marker.py(显式角标 + EXIF/COM 隐式标识)</li></ul></details>
 </article><article class="card">
 <header><h3>金融导流平台 + 渠道接入 AI 工作台</h3><span class="meta">重庆智识维度 · 技术负责人 · 2026.06-至今</span></header>
-<p class="tagline">贷超导流全链路已上生产(撞库、前筛、资方授信、放款、对账);渠道接入由 4 周人工升级为九阶段流水线</p>
+<p class="tagline">上游流量 → 撞库 → 前筛 → 资方授信 / 放款 → 对账,已上生产;渠道接入九阶段自治流水线</p>
 <div class="chips"><span class="chip"><b>6.6s → 264ms</b> 撞库平均耗时<i>生产同窗口 A/B</i></span><span class="chip"><b>29.5s → 2.5s</b> 下游进件超时<i>ZQX test 同路径</i></span><span class="chip"><b>配置 + 实现类</b> 新渠道接入<i>核心域零改动</i></span><span class="chip"><b>545 + 363</b> 工作台测试门禁<i>全绿 · 覆盖 ≥79% 回归闸</i></span><span class="chip"><b>46 文件</b> 代码生成<i>真机落盘</i></span><span class="chip"><b>1ms</b> 知识检索<i>命中</i></span></div>
 
-<details><summary>展开细节</summary><ul class="hl"><li><span class="q">生产撞库雪崩:缺索引叠加超时重试正反馈,越慢越重试</span><span class="a">索引 + 超时治理 + 三层弹性(有界池背压 / 每渠道熔断半开探测 / 线程池饱和回压)</span><span class="r">平均耗时 6.6s → 264ms,峰值在途 72.9 → 3.24</span></li><li><span class="q">渠道与资方差异持续扩散,N×M 手工适配改一处崩一片</span><span class="a">核心域只认 13 类 Canonical 模型,差异收敛进适配器 SPI + 注册表</span><span class="r">接新渠道 = 一条配置 + 一个实现 bean,核心域零改动</span></li><li><span class="q">跨库双写会丢、双实例下日限额超发、账单对不平</span><span class="a">四类 Outbox 至少一次投递 + 行级隔离重投 + DEAD 死信;Redis INCR 原子占额;实时流水 → 日终闭账 → 幂等净补差</span><span class="r">账不平可定位到逐笔流水,改价当天回溯补差、历史留单价快照</span></li><li><span class="q">渠道接入 4 周级人工:文档人读、适配手写、联调人盯</span><span class="a">九阶段流水线:文档解析 → 规格人工闸 → 代码生成 → 编译闭环 → 用例 → 报文比对 → 上线六步链 → 知识沉淀;LLM 只 3 处介入,判定 100% 程序化</span><span class="r">全链真机跑通:46 文件落盘、上线链 15/15 对 mock、KR3 定位 100% / 误报 0%</span></li><li><span class="q">AI 生成代码进生产,谁批准、中断怎么恢复</span><span class="a">规格 / 产物经人工闸收口;审批挂起即落库(杀进程重启可恢复,真机回放过);签名域 fail-closed;覆盖率回归闸 ≥79%</span><span class="r">前端 545 + Rust 363 测试全绿;覆盖率实测 79.83%</span></li></ul></details>
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:生产撞库雪崩:缺索引叠加超时重试正反馈,越慢越重试</span><span class="a">做法:索引 + 超时治理 + 三层弹性(有界池背压 / 每渠道熔断半开探测 / 线程池饱和回压)</span><span class="r">结果:平均耗时 6.6s → 264ms,峰值在途 72.9 → 3.24</span></li><li><span class="q">问题:渠道与资方差异持续扩散,N×M 手工适配改一处崩一片</span><span class="a">做法:核心域只认 13 类 Canonical 模型,差异收敛进适配器 SPI + 注册表</span><span class="r">结果:接新渠道 = 一条配置 + 一个实现 bean,核心域零改动</span></li><li><span class="q">问题:跨库双写会丢、双实例下日限额超发、账单对不平</span><span class="a">做法:四类 Outbox 至少一次投递 + 行级隔离重投 + DEAD 死信;Redis INCR 原子占额;实时流水 → 日终闭账 → 幂等净补差</span><span class="r">结果:账不平可定位到逐笔流水,改价当天回溯补差、历史留单价快照</span></li><li><span class="q">问题:渠道接入 4 周级人工:文档人读、适配手写、联调人盯</span><span class="a">做法:九阶段流水线:文档解析 → 规格人工闸 → 代码生成 → 编译闭环 → 用例 → 报文比对 → 上线六步链 → 知识沉淀;LLM 只 3 处介入,判定 100% 程序化</span><span class="r">结果:全链真机跑通:46 文件落盘、上线链 15/15 对 mock、KR3 定位 100% / 误报 0%</span></li><li><span class="q">问题:AI 生成代码进生产,谁批准、中断怎么恢复</span><span class="a">做法:规格 / 产物经人工闸收口;审批挂起即落库(杀进程重启可恢复,真机回放过);签名域 fail-closed;覆盖率回归闸 ≥79%</span><span class="r">结果:前端 545 + Rust 363 测试全绿;覆盖率实测 79.83%</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>生产口径与排查记录 —— 弹药库(脱敏;代码与截图不对外)</li><li>机制 —— 回代码核实:DownstreamAdapter.java(SPI)、ChannelAdapterRegistry.java、DownstreamDispatcher.java、DownstreamCircuitBreaker.java、DailyApplyLimiter.java、CkOutbox.java + CkOutboxDrainTask.java、recon/(实时计费 + 日终闭账)</li><li>工作台门禁与规模 —— 本轮实测(2026-10-14,HEAD e37664c):vitest 545 通过 / 5 跳过;cargo test --lib 363 通过 / 16 ignored;ci.yml 覆盖率 ≥79% 闸(cargo-llvm-cov,实测 79.83%);Rust 359 文件 / 4.1 万行 + 前端 319 文件 / 3.8 万行;148 条 IPC 命令统一 handler</li><li>工作台九阶段真机数据 —— 2026-10-05 全链走查(46 文件 / 15/15 对 mock / 1ms / KR3 50/50);docs/acceptance/D075-D079(彩排 / 打包 / 签名公证 / 稳定性验收)</li><li>工作台机制 —— 回代码核实:pipeline/guard.rs(阶段完成守卫)、permission.rs(审批挂起落库)、codegen/render/context.rs(签名域 fail-closed)、mocksrv.rs(进程内 mock)、knowledge/index.rs(tantivy 检索)、diffeng.rs:16-17(LLM 不参与判定)</li></ul></details>
 </article><article class="card">
 <header><h3>A 股量化研究系统(个人研究,未实盘)</h3><span class="meta">独立自建 · 独立 · 2025.12-2026.06</span></header>
-<p class="tagline">A 股数据底座与撮合引擎重构,训练与晋级设三道防过拟合闸</p>
+<p class="tagline">数据底座 + 撮合重构 + 三道防自欺闸门</p>
 <div class="chips"></div>
 
-<details><summary>展开细节</summary><ul class="hl"></ul></details>
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>口径 —— 弹药库/评审-量化平台(个人研究系统,未实盘)</li><li>规模数字回代码实测(2026-10-14):303 张表 = 第一方 .py 里 CREATE TABLE 去重(351 条语句,排除 tests/attic/docs/归档/venv);67 = tools/sync_*.py 计数;314 = config/cron/*.yaml 顶层条目;四层架构见 tools/trading/match_engine/__init__.py:3;2.29 亿行 / 82× 见 datalayer/ch/ddl/market_minute.py:26-29;908 万行 / 14ms 见 datalayer/ch/ddl/views.py:48-51</li><li>口径虚高数字回代码核实(2026-10-14):stacking -81%→-33% / 6.4→2.9 见 tools/lib/stats.py:139-146(overlap_aware_metrics);OLD_4 h5 2.37→~1.0 见 tools/lib/stats.py:35-41;三闸实现 deflated_sharpe 见 stats.py:65(Bailey &amp; López de Prado 2014)、pbo_cscv 见 stats.py:181(CSCV)、ΔIC 合取规则见 tools/agents/ensemble_ablation/runner.py:7,124。⚠️ 历史稿「Sharpe 2.37 / 回撤 -85% → 1.07 / -30%」把两个独立案例混成一条(-85%/-30% 查无出处),已按源码重写</li></ul></details>
 </article><article class="card">
-<header><h3>Agent 工具调用微调与能力边界评测</h3><span class="meta">独立作品 · 独立完成 · 2026</span></header>
-<p class="tagline">Qwen3-0.6B 工具调用微调,三维度评测量化能力边界</p>
+<header><h3>Agent 工具调用微调 —— 能力边界量化</h3><span class="meta">独立作品 · 独立完成 · 2026</span></header>
+<p class="tagline">小模型 + 轨迹 SFT 能学会什么、学不会什么 —— 三维度分离评测给出量化答案</p>
 <div class="chips"></div>
 <div class="links"><span class="locked" title="https://github.com/zzbjll/agent-toolcall-sft">代码仓库(私有,可授权查看)</span></div>
-<details><summary>展开细节</summary><ul class="hl"><li><span class="q">小模型能否接住 Agent 工具调用、SFT 能解决哪一层</span><span class="a">合成 1140 条轨迹 + LoRA 微调 + 三维度分离评测(格式 / 选择 / 答案不混成一个分)</span><span class="r">格式 20/20 全学会、工具选择 2/10 学不动 —— 边界量化,指导选型</span></li><li><span class="q">全参微调显存吃紧、单卡跑不动</span><span class="a">DeepSpeed ZeRO-2 切优化器状态与梯度,2 卡跑通;merge_and_unload 合回基座(推理零开销)</span><span class="r">2207 条全参对照跑通,checkpoint 在案</span></li></ul></details>
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:小模型能否接住 Agent 工具调用、SFT 能解决哪一层</span><span class="a">做法:合成 1140 条轨迹 + LoRA 微调 + 三维度分离评测(格式 / 选择 / 答案不混成一个分)</span><span class="r">结果:格式 20/20 全学会、工具选择 2/10 学不动 —— 边界量化,指导选型</span></li><li><span class="q">问题:全参微调显存吃紧、单卡跑不动</span><span class="a">做法:DeepSpeed ZeRO-2 切优化器状态与梯度,2 卡跑通;merge_and_unload 合回基座(推理零开销)</span><span class="r">结果:2207 条全参对照跑通,checkpoint 在案</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>工程与数据 —— train_project(11 个脚本 + 1140 条轨迹数据 wc -l 实测 + 三维度评测报告);超参回代码核实:scripts/02_train.py:55-68(max_length 8192 / batch 1 / accum 8 / 3 epoch / lr 2e-5 / r=16 / α=32)、:131(7 个 target modules)、:150-151(cosine + warmup_ratio 0.1);数据校验 6 条规则:src/data/schema_v2.py:195-255(JSON/XML 双格式支持 :221-225);对话拆分 + 末轮加权:Agent+SFT/conversation_splitter.py:1-12;评测集构造:build_before_after_judged_set.py(target-count 10,从训练集经 LLM 评审挑「前后差异明显」样本 —— 评测数字按此口径解读,非泛化评测)</li><li>评测数字 —— reports/training_before_after_summary.md(格式 4/20→20/20、工具选择 0/10→2/10、答案正确 0/10→2/10、完整度 0%→17%)</li><li>全参工程 —— Agent+SFT(README 三路径:LoRA / 合并 / 全参);超参回代码核实:run_train_full_finetune.sh(max_seq 14096 / accum 16 / bf16 / gradient_checkpointing / warmup 0.03)、merge_lora_into_base.py(merge_and_unload + safe_serialization);数据规模实测:merged_train_final_multiturn_v2.json 2207 条</li><li>分布式 —— 第11周工程:train.py(DeepSpeedPlugin zero_stage=2 + gradient_clipping=1.0 + Accelerator)、my_accelerate_config.yaml(distributed_type DEEPSPEED / num_processes 2);真训练产物 trainer_output/checkpoint-471/500/1000/1500/1875 + runs/ + saved_model/</li></ul></details>
 </article><article class="card">
 <header><h3>自治 AI 员工系统(排班值班 + 评审门)</h3><span class="meta">自主创业 · 独立开发 · 2026.04-至今</span></header>
-<p class="tagline">AI 员工自治值班体系:排班调度、安全闸、双模型评审门</p>
+<p class="tagline">排班 → 自主值班 → 安全闸 → 双模型评审门:让 AI 7×24 干活且可控</p>
 <div class="chips"><span class="chip"><b>489 班</b> 自主值班<i>每 30 分钟一班</i></span><span class="chip"><b>双 PASS 放行</b> 评审门<i>2026-06-14 v1 上线</i></span></div>
 
-<details><summary>展开细节</summary><ul class="hl"><li><span class="q">AI 自主干活不可控:幻觉乱改、越权、交付无法追责</span><span class="a">排班 + 自治值班 + 安全闸 Hook 拦危险操作 + 双 LLM 异构评审门(涉钱改动双 PASS 才放行)</span><span class="r">自主值班 489 班;涉钱改动 2026-06-14 起双模型点头;记忆湖事件溯源 4500+ 条</span></li></ul></details>
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:AI 自主干活不可控:幻觉乱改、越权、交付无法追责</span><span class="a">做法:排班 + 自治值班 + 安全闸 Hook 拦危险操作 + 双 LLM 异构评审门(涉钱改动双 PASS 才放行)</span><span class="r">结果:自主值班 489 班;涉钱改动 2026-06-14 起双模型点头;记忆湖事件溯源 4500+ 条</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>值班与门禁 —— 物证:.claude/night_tasks/autodev_shift_*.log(489 个班次日志);CK stock.autodev_ship_verdict(gate_version v1-20260614);MULTIPROJECT_DESIGN.md</li><li>记忆湖 —— CK memory_events 事件表(2026-06-06 起;4514 条,2026-10-10 实测)</li></ul></details>
 </article><article class="card">
 <header><h3>多模态 RAG 工程(图片语境化 + 在线自评)</h3><span class="meta">独立作品 · 独立完成 · 2025.12-2026.06</span></header>
-<p class="tagline">多模态 RAG:图片语境化入库、Milvus 双路检索、RAGAS 在线自评</p>
+<p class="tagline">dots-OCR 版面解析 → 图片语境化入库 → Milvus 双路检索 → LangGraph 10 节点 + RAGAS 在线自评</p>
 <div class="chips"><span class="chip"><b>约 2.8k 行</b> 核心自研<i>37 py / 5222 行总</i></span><span class="chip"><b>10 节点</b> 工作流<i>LangGraph 状态图</i></span></div>
 
-<details><summary>展开细节</summary><ul class="hl"><li><span class="q">PDF 图片检索不到:图与文本不在同一语义空间</span><span class="a">qwen3-vl 取图前后文生成 ≤300 字描述再向量化,图文共用稠密空间;Milvus 单集合 dense + 服务端 BM25 双路融合</span><span class="r">纯文本查询可召回图片;省掉自建 BM25 索引与一致性维护</span></li><li><span class="q">RAG 答错无人拦</span><span class="a">RAGAS 当流程节点:检索侧相关性不达标丢弃上下文;生成侧 &lt;0.7 触发人工审批,拒则联网兜底</span><span class="r">低分不重生成而换信息源(方向错时重生成只烧 token)</span></li></ul></details>
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:PDF 图片检索不到:图与文本不在同一语义空间</span><span class="a">做法:qwen3-vl 取图前后文生成 ≤300 字描述再向量化,图文共用稠密空间;Milvus 单集合 dense + 服务端 BM25 双路融合</span><span class="r">结果:纯文本查询可召回图片;省掉自建 BM25 索引与一致性维护</span></li><li><span class="q">问题:RAG 答错无人拦</span><span class="a">做法:RAGAS 当流程节点:检索侧相关性不达标丢弃上下文;生成侧 &lt;0.7 触发人工审批,拒则联网兜底</span><span class="r">结果:低分不重生成而换信息源(方向错时重生成只烧 token)</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>代码与行号 —— 弹药库/评审-RAG与DeepResearch.md(A 包,2026-09-08 只读评审:37 py / 5222 行,自研活代码约 2.8k;file:line 实测)</li><li>机制 —— 回代码核实:db_operator.py:114-160(图片语境化)、collections_operator.py:21-50(BM25 服务端)、workflow.py:172-219(10 节点状态图)、tools.py:68 + evaluate_node.py:22(RAGAS 两指标入流程)、embeddings_utils.py:30-69(RPM 限速 + 429 退避)</li></ul></details>
 </article><article class="card">
 <header><h3>DeepResearch 深度研究编排引擎</h3><span class="meta">独立作品 · 独立完成 · 2025.12-2026.06</span></header>
-<p class="tagline">OODA 并行编排 + 终止三保险,深度研究成本可控</p>
+<p class="tagline">OODA 并行编排 + 终止三保险:把深度研究的无限迭代压成可估成本</p>
 <div class="chips"><span class="chip"><b>4.1k 行 / 9 模块</b> 规模<i>只读评审实测</i></span><span class="chip"><b>上限 6 / 典型 3</b> 并行编排<i>OODA worker</i></span></div>
 
-<details><summary>展开细节</summary><ul class="hl"><li><span class="q">深度研究容易无限迭代、成本失控</span><span class="a">终止三保险:迭代上下限(min2 / max5)+ 质量门 80 + 收益递减判停;worker 查询预算按复杂度分配(3 / 5 / 8)</span><span class="r">最坏成本可估;并行上限 6 worker(典型 3)</span></li><li><span class="q">LLM 结构化输出有失败率,失败整轮崩</span><span class="a">extract_json 两级降级;失败返回低置信度骨架并把失败事实写进 limitations,对下游可见</span><span class="r">单 worker 失败不拖垮整轮;报告带置信度标注</span></li></ul></details>
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:深度研究容易无限迭代、成本失控</span><span class="a">做法:终止三保险:迭代上下限(min2 / max5)+ 质量门 80 + 收益递减判停;worker 查询预算按复杂度分配(3 / 5 / 8)</span><span class="r">结果:最坏成本可估;并行上限 6 worker(典型 3)</span></li><li><span class="q">问题:LLM 结构化输出有失败率,失败整轮崩</span><span class="a">做法:extract_json 两级降级;失败返回低置信度骨架并把失败事实写进 limitations,对下游可见</span><span class="r">结果:单 worker 失败不拖垮整轮;报告带置信度标注</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>代码与行号 —— 弹药库/评审-RAG与DeepResearch.md(B 包,2026-09-08 只读评审,file:line 实测);源码在 弹药库/_dr_unzip/deep_research(9 py / 4115 行)</li><li>机制 —— 回代码核实:orchestrator.py:697-849(五阶段)、:759-816(终止三保险)、workers.py:227-274(预算分配)、tools.py:292-320(JSON 降级)、api.py:283-450(FastAPI + SSE)</li></ul></details>
 </article>
 <footer>本页由 facts.yaml 生成(v21-20261014);改源不改稿。
