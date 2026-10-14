@@ -149,8 +149,8 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <div class="item"><span>A 股量化研究系统(个人研究,未实盘) ｜ 独立自建 · 独立</span><span class="date">2025.12-2026.06</span></div>
 <p>数据底座 + 撮合重构 + 三道防自欺闸门</p>
 <ul>
-<li><strong>数据底座</strong>:ClickHouse <strong>303 张表</strong>(第一方代码建表去重实测)/ <strong>67</strong> 条采集脚本 / <strong>314</strong> 条 cron 任务;撮合引擎四层架构重构(抽象层 + 数据源 + 三种撮合实现 + 注册表)</li>
-<li><strong>热点查询治理</strong>:min5 主键索引降级成全表扫 <strong>2.29 亿行</strong>(2.3s)→ 加进度加速表 + 物化视图自动维护 → <strong>28ms(82×)</strong>;物化 PIT 视图 <strong>908 万行</strong>改查索引后 <strong>14ms(约 10×)</strong></li>
+<li><strong>数据底座与热点治理</strong>:ClickHouse <strong>303 张表</strong>(第一方建表去重实测)/ <strong>67</strong> 采集脚本 / <strong>314</strong> cron 任务;撮合引擎四层架构重构;min5 主键索引降级成全表扫 <strong>2.29 亿行</strong>(2.3s)→ 加速表 + 物化视图 → <strong>28ms(82×)</strong></li>
+<li><strong>模型训练与上线闸</strong>:walk-forward LightGBM 逐窗训练 + 过期检测只重训过期窗(实测 2 worker 仅 1.22×,受内存带宽限 → 定 1 worker);晋级把纯逻辑核与真写库分离,默认 dry-run + 显式签字才落库,`touches_money` 围栏 + 反向 INSERT 回滚</li>
 <li><strong>回测口径自欺(硬闸拦下)</strong>:重叠持仓按天复利 → 每笔收益被重复复利 horizon 次 → 实测 stacking <strong>MaxDD -81% 实为 -33%、Sharpe 6.4 实为 2.9</strong>,OLD_4 h5 <strong>Sharpe 2.37 实为 ~1.0</strong> → 拆非重叠相位重算 + DSR(Bailey &amp; López de Prado)/ PBO(CSCV)/ ΔIC 三闸合取,不达标不放行</li>
 </ul>
 <h2>工作经历</h2>
@@ -224,8 +224,8 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <div class="item"><span>A 股量化研究系统(个人研究,未实盘) ｜ 独立自建 · 独立</span><span class="date">2025.12-2026.06</span></div>
 <p>数据底座 + 撮合重构 + 三道防自欺闸门</p>
 <ul>
-<li><strong>数据底座</strong>:ClickHouse <strong>303 张表</strong>(第一方代码建表去重实测)/ <strong>67</strong> 条采集脚本 / <strong>314</strong> 条 cron 任务;撮合引擎四层架构重构(抽象层 + 数据源 + 三种撮合实现 + 注册表)</li>
-<li><strong>热点查询治理</strong>:min5 主键索引降级成全表扫 <strong>2.29 亿行</strong>(2.3s)→ 加进度加速表 + 物化视图自动维护 → <strong>28ms(82×)</strong>;物化 PIT 视图 <strong>908 万行</strong>改查索引后 <strong>14ms(约 10×)</strong></li>
+<li><strong>数据底座与热点治理</strong>:ClickHouse <strong>303 张表</strong>(第一方建表去重实测)/ <strong>67</strong> 采集脚本 / <strong>314</strong> cron 任务;撮合引擎四层架构重构;min5 主键索引降级成全表扫 <strong>2.29 亿行</strong>(2.3s)→ 加速表 + 物化视图 → <strong>28ms(82×)</strong></li>
+<li><strong>模型训练与上线闸</strong>:walk-forward LightGBM 逐窗训练 + 过期检测只重训过期窗(实测 2 worker 仅 1.22×,受内存带宽限 → 定 1 worker);晋级把纯逻辑核与真写库分离,默认 dry-run + 显式签字才落库,`touches_money` 围栏 + 反向 INSERT 回滚</li>
 <li><strong>回测口径自欺(硬闸拦下)</strong>:重叠持仓按天复利 → 每笔收益被重复复利 horizon 次 → 实测 stacking <strong>MaxDD -81% 实为 -33%、Sharpe 6.4 实为 2.9</strong>,OLD_4 h5 <strong>Sharpe 2.37 实为 ~1.0</strong> → 拆非重叠相位重算 + DSR(Bailey &amp; López de Prado)/ PBO(CSCV)/ ΔIC 三闸合取,不达标不放行</li>
 </ul>
 <h2>工作经历</h2>
@@ -301,8 +301,8 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <div class="item"><span>A 股量化研究系统(个人研究,未实盘) ｜ 独立自建 · 独立</span><span class="date">2025.12-2026.06</span></div>
 <p>数据底座 + 撮合重构 + 三道防自欺闸门</p>
 <ul>
-<li><strong>数据底座</strong>:ClickHouse <strong>303 张表</strong>(第一方代码建表去重实测)/ <strong>67</strong> 条采集脚本 / <strong>314</strong> 条 cron 任务;撮合引擎四层架构重构(抽象层 + 数据源 + 三种撮合实现 + 注册表)</li>
-<li><strong>热点查询治理</strong>:min5 主键索引降级成全表扫 <strong>2.29 亿行</strong>(2.3s)→ 加进度加速表 + 物化视图自动维护 → <strong>28ms(82×)</strong>;物化 PIT 视图 <strong>908 万行</strong>改查索引后 <strong>14ms(约 10×)</strong></li>
+<li><strong>数据底座与热点治理</strong>:ClickHouse <strong>303 张表</strong>(第一方建表去重实测)/ <strong>67</strong> 采集脚本 / <strong>314</strong> cron 任务;撮合引擎四层架构重构;min5 主键索引降级成全表扫 <strong>2.29 亿行</strong>(2.3s)→ 加速表 + 物化视图 → <strong>28ms(82×)</strong></li>
+<li><strong>模型训练与上线闸</strong>:walk-forward LightGBM 逐窗训练 + 过期检测只重训过期窗(实测 2 worker 仅 1.22×,受内存带宽限 → 定 1 worker);晋级把纯逻辑核与真写库分离,默认 dry-run + 显式签字才落库,`touches_money` 围栏 + 反向 INSERT 回滚</li>
 <li><strong>回测口径自欺(硬闸拦下)</strong>:重叠持仓按天复利 → 每笔收益被重复复利 horizon 次 → 实测 stacking <strong>MaxDD -81% 实为 -33%、Sharpe 6.4 实为 2.9</strong>,OLD_4 h5 <strong>Sharpe 2.37 实为 ~1.0</strong> → 拆非重叠相位重算 + DSR(Bailey &amp; López de Prado)/ PBO(CSCV)/ ΔIC 三闸合取,不达标不放行</li>
 </ul>
 <h2>工作经历</h2>
@@ -363,8 +363,8 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <div class="item"><span>A 股量化研究系统(个人研究,未实盘) ｜ 独立自建 · 独立</span><span class="date">2025.12-2026.06</span></div>
 <p>数据底座 + 撮合重构 + 三道防自欺闸门</p>
 <ul>
-<li><strong>数据底座</strong>:ClickHouse <strong>303 张表</strong>(第一方代码建表去重实测)/ <strong>67</strong> 条采集脚本 / <strong>314</strong> 条 cron 任务;撮合引擎四层架构重构(抽象层 + 数据源 + 三种撮合实现 + 注册表)</li>
-<li><strong>热点查询治理</strong>:min5 主键索引降级成全表扫 <strong>2.29 亿行</strong>(2.3s)→ 加进度加速表 + 物化视图自动维护 → <strong>28ms(82×)</strong>;物化 PIT 视图 <strong>908 万行</strong>改查索引后 <strong>14ms(约 10×)</strong></li>
+<li><strong>数据底座与热点治理</strong>:ClickHouse <strong>303 张表</strong>(第一方建表去重实测)/ <strong>67</strong> 采集脚本 / <strong>314</strong> cron 任务;撮合引擎四层架构重构;min5 主键索引降级成全表扫 <strong>2.29 亿行</strong>(2.3s)→ 加速表 + 物化视图 → <strong>28ms(82×)</strong></li>
+<li><strong>模型训练与上线闸</strong>:walk-forward LightGBM 逐窗训练 + 过期检测只重训过期窗(实测 2 worker 仅 1.22×,受内存带宽限 → 定 1 worker);晋级把纯逻辑核与真写库分离,默认 dry-run + 显式签字才落库,`touches_money` 围栏 + 反向 INSERT 回滚</li>
 <li><strong>回测口径自欺(硬闸拦下)</strong>:重叠持仓按天复利 → 每笔收益被重复复利 horizon 次 → 实测 stacking <strong>MaxDD -81% 实为 -33%、Sharpe 6.4 实为 2.9</strong>,OLD_4 h5 <strong>Sharpe 2.37 实为 ~1.0</strong> → 拆非重叠相位重算 + DSR(Bailey &amp; López de Prado)/ PBO(CSCV)/ ΔIC 三闸合取,不达标不放行</li>
 </ul>
 <div class="item"><span>企业级 LLM 网关与长时记忆 ｜ 同司 AI 基建 · 主导</span><span class="date">2026.07-至今</span></div>
