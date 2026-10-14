@@ -55,14 +55,14 @@ footer a{color:var(--navy);}
 </article><article class="card">
 <header><h3>金融智能问答 Agent 平台</h3><span class="meta">小象优品 · 核心开发(3-5 人) · 2024.06-2025.11</span></header>
 <p class="tagline">plan-execute 编排 + 权限闸 + 三层幻觉守门,内部与外部双入口</p>
-<div class="chips"><span class="chip"><b>70% → 90%</b> 意图识别<i>45 条种子 case 评测集</i></span><span class="chip"><b>-60%</b> 单会话成本<i>缓存 + 裁剪</i></span><span class="chip"><b>54 passed</b> 回归测试<i>本地单测(2026-10-14)</i></span></div>
+<div class="chips"><span class="chip"><b>70% → 90%</b> 意图识别<i>45 条种子 case 评测集</i></span><span class="chip"><b>-60%</b> 单会话成本<i>档位路由(轻/重模型)</i></span><span class="chip"><b>54 passed</b> 回归测试<i>本地单测(2026-10-14)</i></span></div>
 
 <details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:规则基线误路由偏高</span><span class="a">做法:意图路由 + 澄清策略 + 连续澄清 3 次自动转人工</span><span class="r">结果:意图识别 70% → 90%(45 条种子 case 评测)</span></li><li><span class="q">问题:工具失败被吞成&quot;未命中模板&quot;</span><span class="a">做法:工具失败统一出口透传错误 + route=error</span><span class="r">结果:失败可观测</span></li><li><span class="q">问题:编造与越权风险</span><span class="a">做法:三层幻觉守门 + 内/外/用户三级可见性 + 审计脱敏</span><span class="r">结果:生产可用</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>评测口径与样本量 —— 弹药库/面试分层应答(70→90% 口径)</li><li>回归测试 —— pytest tests/(54 passed,含澄清连击转人工与工具失败 error 两条新回归)</li></ul></details>
 </article><article class="card">
 <header><h3>金融导流平台(双产品线)</h3><span class="meta">重庆智识维度 · 技术负责人 · 2026.06-至今</span></header>
 <p class="tagline">上游流量 → 撞库 → 前筛 → 路由资方 → 授信 / 放款 → 双向对账,已上生产</p>
-<div class="chips"><span class="chip"><b>6.6s → 264ms</b> 撞库耗时<i>生产</i></span><span class="chip"><b>29.5s → 2.5s</b> 进件耗时<i>生产</i></span><span class="chip"><b>生产运行</b> 状态<i>公司资产</i></span></div>
+<div class="chips"><span class="chip"><b>6.6s → 264ms</b> 撞库平均耗时<i>生产</i></span><span class="chip"><b>29.5s → 2.5s</b> 进件耗时<i>ZQX test 环境</i></span><span class="chip"><b>生产运行</b> 状态<i>公司资产</i></span></div>
 
 <details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:生产撞库雪崩(缺索引 + 超时重试正反馈)</span><span class="a">做法:索引 + 超时治理 + 熔断</span><span class="r">结果:6.6s → 264ms(25×)</span></li><li><span class="q">问题:下游进件超时(GC 冻结)</span><span class="a">做法:参数与 GC 调优 + 终态保护</span><span class="r">结果:29.5s → 2.5s</span></li><li><span class="q">问题:N×M 渠道/资方集成持续扩散</span><span class="a">做法:防腐层 ACL + 适配器 SPI + 7 层正交加解密策略</span><span class="r">结果:新渠道 = 配置 + 实现类 + 契约测试</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>生产口径与排查记录 —— 弹药库(脱敏;代码与截图不对外)</li></ul></details>
