@@ -40,40 +40,6 @@ ul{margin:8px 0 4px;padding-left:18px;}
 footer{margin-top:26px;padding-top:10px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--gray);}
 footer a{color:var(--navy);}
 @media(max-width:640px){.page{padding:16px 16px 30px;}h1{font-size:22px;}}
-
-.viznote{font-size:11.5px;color:#8a94a6;margin:-6px 0 10px;}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;}
-.chart{border:1px solid var(--line);border-radius:6px;padding:10px 12px;background:#fff;}
-.ct{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 8px;font-size:12.5px;font-weight:bold;color:var(--navy);margin:0 0 7px;}
-.badge{font-weight:normal;font-size:10.5px;color:#1a6b3c;background:#eef7f1;border:1px solid #cfe6d8;border-radius:9px;padding:1px 8px;white-space:nowrap;}
-.cb{display:flex;align-items:center;gap:8px;margin:4px 0;}
-.cl{font-size:11px;color:var(--gray);width:112px;flex:none;text-align:right;}
-.cv{font-size:11.5px;color:#333;width:62px;flex:none;font-variant-numeric:tabular-nums;}
-.bar{flex:1;background:#f2f4f8;border-radius:4px;height:11px;overflow:hidden;}
-.bar i{display:block;height:100%;background:#c9d2e0;border-radius:4px;transition:width .8s ease;}
-.bar i.hi{background:var(--navy);}
-.csrc{font-size:10.5px;color:#8a94a6;margin-top:7px;line-height:1.5;}
-.flow{margin:8px 0 4px;}
-.fc{font-size:11.5px;color:var(--gray);margin:0 0 5px;}
-.frow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px;margin:0 0 8px;}
-.fbox{border:1px solid var(--line);border-radius:6px;padding:5px 10px;font-size:12px;color:#333;background:#fbfcfe;line-height:1.35;}
-.fbox b{color:var(--navy);display:block;}
-.fbox i{font-style:normal;font-size:10.5px;color:#8a94a6;}
-.arr{color:#a9b4c6;font-size:12px;align-self:center;}
-.tl{display:flex;gap:8px;overflow-x:auto;padding:6px 2px 10px;}
-.tln{flex:none;font-family:inherit;border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 11px;cursor:pointer;text-align:left;}
-.tln b{display:block;font-size:12.5px;color:var(--navy);}
-.tln span{font-size:11px;color:var(--gray);}
-.tln.on{background:var(--navy);border-color:var(--navy);}
-.tln.on b,.tln.on span{color:#fff;}
-.tld{margin-top:4px;font-size:12.5px;color:#333;background:var(--band);border-radius:6px;padding:9px 12px;}
-.live{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;}
-.phone{width:320px;max-width:100%;border:1px solid var(--line);border-radius:18px;padding:8px;background:#fff;box-shadow:0 6px 18px rgba(31,56,100,.08);}
-.phone iframe{width:100%;height:540px;border:0;border-radius:12px;background:#f6f8fb;display:block;}
-.lvtxt{flex:1;min-width:260px;}
-.lvt{font-size:14px;font-weight:bold;color:var(--navy);margin:2px 0 6px;}
-.lvd{font-size:12.5px;color:#333;margin:0 0 10px;}
-@media(max-width:640px){.grid{grid-template-columns:1fr;}.cl{width:96px;}}
 </style></head><body><div class="page">
 <h1>张建乐</h1>
 <p class="title">AI 应用 · 后端架构</p>
@@ -81,75 +47,50 @@ footer a{color:var(--navy);}
 <p class="contact">电话 15221599617 · 邮箱 zhangjianle617@163.com · <a href="https://zzbjll.github.io/resume">https://zzbjll.github.io/resume</a></p>
 <div class="digits"><div class="digit"><b>10 年</b>后端与架构</div><div class="digit"><b>近 3 年</b>AI 应用落地</div><div class="digit"><b>三次</b>0-1 生产系统</div><div class="digit"><b>6.6s → 264ms</b>稳定性治理</div></div>
 <div class="track"><span><b>2024.06</b>Agent 应用层:意图路由 / 工具编排 / 幻觉守门</span><span><b>2026.07</b>AI 基建层:LLM 网关 / 长时记忆 / 多租户</span><span><b>2026.10</b>多模态产品层:生成质量可量化 / 合规上线</span></div>
-<h2>关键数字</h2><p class="viznote">每个数字都可指到来源;与简历同源(facts.yaml),改源不改稿。深色条 = 改造后 / 采纳口径。</p><div class="grid"><div class="chart"><div class="ct"><span>网关 · 端到端延迟</span><span class="badge">8.4×↓</span></div><div class="cb"><span class="cl">改造前</span><div class="bar"><i style="width:100%"></i></div><span class="cv">30.1s</span></div><div class="cb"><span class="cl">改造后</span><div class="bar"><i class="hi" style="width:12%"></i></div><span class="cv">3.6s</span></div><div class="csrc">来源:分段计时定位:CK 建连 + DDL 约 120ms 卡在异步事件循环(端到端测不出)</div></div><div class="chart"><div class="ct"><span>网关 · 记忆 P@1</span><span class="badge">+6.3%</span></div><div class="cb"><span class="cl">单臂向量召回</span><div class="bar"><i style="width:94%"></i></div><span class="cv">0.853</span></div><div class="cb"><span class="cl">双臂 RRF 融合</span><div class="bar"><i class="hi" style="width:100%"></i></div><span class="cv">0.907</span></div><div class="csrc">来源:n=75 同口径 A/B</div></div><div class="chart"><div class="ct"><span>网关 · 重排 R@4(被实测否决)</span><span class="badge">负贡献 → 关停</span></div><div class="cb"><span class="cl">加 cross-encoder 重排</span><div class="bar"><i style="width:89%"></i></div><span class="cv">0.707</span></div><div class="cb"><span class="cl">关停重排(双臂 RRF)</span><div class="bar"><i class="hi" style="width:100%"></i></div><span class="cv">0.797</span></div><div class="csrc">来源:凭直觉的优化被同口径 A/B 否决;并量化评测工具自身 16.3% 翻面噪声</div></div><div class="chart"><div class="ct"><span>假发 · 脸区像素差 P99</span><span class="badge">6.6×↓</span></div><div class="cb"><span class="cl">仅提示词约束(对照)</span><div class="bar"><i style="width:100%"></i></div><span class="cv">33</span></div><div class="cb"><span class="cl">不换脸管线</span><div class="bar"><i class="hi" style="width:15%"></i></div><span class="cv">5~8</span></div><div class="csrc">来源:eval/report.md · 4 对样本可复跑(零 API 花费)</div></div><div class="chart"><div class="ct"><span>假发 · 后处理耗时</span><span class="badge">5.8×↓</span></div><div class="cb"><span class="cl">优化前</span><div class="bar"><i style="width:100%"></i></div><span class="cv">85s</span></div><div class="cb"><span class="cl">优化后</span><div class="bar"><i class="hi" style="width:17%"></i></div><span class="cv">14.7s</span></div><div class="csrc">来源:分割 512→256 · matting 512→384 · 本地 ONNX CPU;公网端到端 48.0s</div></div><div class="chart"><div class="ct"><span>贷超 · 撞库平均耗时</span><span class="badge">25×↓</span></div><div class="cb"><span class="cl">雪崩时</span><div class="bar"><i style="width:100%"></i></div><span class="cv">6.6s</span></div><div class="cb"><span class="cl">治理后</span><div class="bar"><i class="hi" style="width:4%"></i></div><span class="cv">264ms</span></div><div class="csrc">来源:生产同窗口 A/B · 峰值在途 72.9 → 3.24</div></div><div class="chart"><div class="ct"><span>贷超 · 下游进件超时</span><span class="badge">11.8×↓</span></div><div class="cb"><span class="cl">治理前</span><div class="bar"><i style="width:100%"></i></div><span class="cv">29.5s</span></div><div class="cb"><span class="cl">治理后</span><div class="bar"><i class="hi" style="width:8%"></i></div><span class="cv">2.5s</span></div><div class="csrc">来源:ZQX test 同路径实测(GC 调优 + 终态保护)</div></div><div class="chart"><div class="ct"><span>量化 · 回测口径修正(防自欺)</span><span class="badge">闸门拦下</span></div><div class="cb"><span class="cl">表面口径(重叠复利)</span><div class="bar"><i style="width:100%"></i></div><span class="cv">Sharpe 6.4</span></div><div class="cb"><span class="cl">修正后</span><div class="bar"><i class="hi" style="width:45%"></i></div><span class="cv">Sharpe 2.9</span></div><div class="csrc">来源:stats.py:139-146 —— 重叠持仓按天复利,每笔收益被重复复利 horizon 次</div></div><div class="chart"><div class="ct"><span>量化 · 2.29 亿行全表扫</span><span class="badge">82×↓</span></div><div class="cb"><span class="cl">主键索引降级全表扫</span><div class="bar"><i style="width:100%"></i></div><span class="cv">2.3s</span></div><div class="cb"><span class="cl">加速表 + 物化视图</span><div class="bar"><i class="hi" style="width:3%"></i></div><span class="cv">28ms</span></div><div class="csrc">来源:datalayer/ch/ddl/market_minute.py:26-29</div></div><div class="chart"><div class="ct"><span>微调 · 三维度分离评测</span><span class="badge">格式全学会 · 选择学不动</span></div><div class="cb"><span class="cl">格式 · 训练前</span><div class="bar"><i style="width:20%"></i></div><span class="cv">4/20</span></div><div class="cb"><span class="cl">格式 · 训练后</span><div class="bar"><i class="hi" style="width:100%"></i></div><span class="cv">20/20</span></div><div class="cb"><span class="cl">工具选择 · 训练前</span><div class="bar"><i style="width:3%"></i></div><span class="cv">0/10</span></div><div class="cb"><span class="cl">工具选择 · 训练后</span><div class="bar"><i class="hi" style="width:20%"></i></div><span class="cv">2/10</span></div><div class="cb"><span class="cl">答案正确 · 训练前</span><div class="bar"><i style="width:3%"></i></div><span class="cv">0/10</span></div><div class="cb"><span class="cl">答案正确 · 训练后</span><div class="bar"><i class="hi" style="width:20%"></i></div><span class="cv">2/10</span></div><div class="csrc">来源:reports/training_before_after_summary.md(评测集经 LLM 评审从训练集筛选,展示行为变化)</div></div></div>
 <h2>项目</h2>
 <article class="card">
 <header><h3>企业级 LLM 网关与长时记忆</h3><span class="meta">同司 AI 基建 · 主导 · 2026.07-至今</span></header>
 <p class="tagline">多厂商网关(换厂商不改代码)+ 长时记忆(事件溯源 + 双臂召回)</p>
 <div class="chips"><span class="chip"><b>30.1s → 3.6s</b> 网关端到端<i>分段计时定位</i></span><span class="chip"><b>0.853 → 0.907</b> 记忆 P@1<i>n=75 同口径 A/B</i></span><span class="chip"><b>-60%</b> 单会话成本<i>档位路由</i></span><span class="chip"><b>5 厂商 / 12 模型</b> 在线规模<i>9 客户端 · 51 天实测</i></span></div>
-<div class="flow"><div class="fc">请求路径(改造后 · 全异步)</div><div class="frow"><span class="fbox"><b>客户端</b><i>SSE 流式</i></span><span class="arr">→</span><span class="fbox"><b>网关</b><i>异步转发</i></span><span class="arr">→</span><span class="fbox"><b>语义档位路由</b><i>轻 / 重模型</i></span><span class="arr">→</span><span class="fbox"><b>厂商 API</b><i>5 厂商 12 模型</i></span></div></div><div class="flow"><div class="fc">用量落库(旁路,不占请求路径)</div><div class="frow"><span class="fbox"><b>SSE usage 解析</b></span><span class="arr">→</span><span class="fbox"><b>有界队列 2000</b></span><span class="arr">→</span><span class="fbox"><b>后台线程</b></span><span class="arr">→</span><span class="fbox"><b>ClickHouse</b><i>三写</i></span></div></div>
+
 <details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:网关端到端 30s,端到端测不出瓶颈在哪</span><span class="a">做法:请求路径分段计时,定位到 CK 建连 + DDL 约 120ms 卡在异步事件循环</span><span class="r">结果:全异步化 + 连接池 + 用量写库转有界队列后台落库 → 30.1s → 3.6s</span></li><li><span class="q">问题:向量召回单臂不够,凭直觉加 cross-encoder 重排</span><span class="a">做法:同口径 A/B 实测:重排 R@4 0.797 → 0.707 是负贡献;双臂 RRF 融合才是正解</span><span class="r">结果:关停重排,P@1 0.853 → 0.907;并量化评测工具自身 16.3% 翻面噪声</span></li><li><span class="q">问题:多厂商 API 各自为政,换家要改代码;一家挂了整条断</span><span class="a">做法:语义档位路由(轻 / 重模型)+ 链式换家(防同账号互切)+ 线程本地连接与代次失效重建</span><span class="r">结果:换厂商不改代码,单会话成本 -60%;51 天 5 厂商 12 模型 9 客户端稳定运行</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>性能与召回口径 —— 弹药库/评审-贷超与AI基建(分段计时 TSV、gate_rerank 改造)</li><li>P@1 基线以 n=75 同口径 A/B 为准;历史稿的 0.45 基线查无出处,已弃用</li><li>机制 —— 回代码核实:gateway.py:105-162(异步转发 + SSE usage 解析)、gw_usage.py:61-111(队列 + 后台线程 + 三写)、gw_providers.py:31-44(档位路由)、gw_failover.py:15-28(链式换家)、deploy.sh:29-110(滚动替换 + 发布闸)、ce_rerank.py:19(重排实测负贡献关停)、recall_core.py:39-123(RRF + 强命中保护)</li></ul></details>
 </article><article class="card">
 <header><h3>金融智能问答 Agent 平台</h3><span class="meta">小象优品 · 核心开发(3-5 人) · 2024.06-2025.11</span></header>
 <p class="tagline">plan-execute 编排 + 权限闸 + 三层幻觉守门,内部与外部双入口</p>
 <div class="chips"></div>
-<div class="flow"><div class="fc">双入口 → 编排 → 守门</div><div class="frow"><span class="fbox"><b>内部 / 外部入口</b></span><span class="arr">→</span><span class="fbox"><b>意图路由</b><i>plan-execute 执行链</i></span><span class="arr">→</span><span class="fbox"><b>权限闸 ×4</b><i>scope / 认证 / 用户 / 高风险</i></span><span class="arr">→</span><span class="fbox"><b>工具调用</b></span><span class="arr">→</span><span class="fbox"><b>三层幻觉守门</b></span><span class="arr">→</span><span class="fbox"><b>答复</b></span></div></div>
+
 <details><summary>问题 → 做法 → 结果</summary><ul class="hl"></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>评测 —— 回代码核实:docs/tool_eval_dataset.json(45 条)、scripts/run_tool_eval.py(route / tool / combo 三指标)。⚠️ 历史稿「70%→90%」查无产物、复现不出,已删;--fast 模式 matched_tools/matched_combo 在 ef() 里硬编码为 True,不引用其分数</li><li>13 条约束 —— 回代码核实:llm_client.py:24-44(业务 8 条 + 知识 5 条)</li><li>4 条权限闸 —— packages/core/tooling.py:98-112(scope 隔离 / 认证 / 用户 / 高风险显式放行)</li><li>回归测试 —— pytest tests/(54 passed)</li></ul></details>
 </article><article class="card">
 <header><h3>假发 AI 试戴(在线作品)</h3><span class="meta">独立作品 · 自有业务线 · 设计 + 开发 + 上线 独立完成 · 2026.10</span></header>
 <p class="tagline">不换脸管线 —— 只换发型,脸 / 身体 / 背景保持原照片像素</p>
 <div class="chips"><span class="chip"><b>48.0s</b> 端到端<i>公网真跑</i></span><span class="chip"><b>5 / 8</b> 脸区像素差 P99<i>对照(仅提示词) 33</i></span><span class="chip"><b>0.975 / 0.958</b> 身份相似度 cos<i>对照 0.918</i></span><span class="chip"><b>85s → 14.7s</b> 后处理耗时<i>本地 ONNX CPU</i></span></div>
-<div class="flow"><div class="fc">不换脸管线(脸 = 原图像素)</div><div class="frow"><span class="fbox"><b>原图</b></span><span class="arr">→</span><span class="fbox"><b>补边 3:4</b></span><span class="arr">→</span><span class="fbox"><b>ARK 生成</b></span><span class="arr">→</span><span class="fbox"><b>裁回对位</b><i>逐像素</i></span><span class="arr">→</span><span class="fbox"><b>蒙版并集</b><i>旧发区 ∪ 新发 α</i></span><span class="arr">→</span><span class="fbox"><b>ViTMatte</b><i>发丝级</i></span><span class="arr">→</span><span class="fbox"><b>composite 合成</b></span></div></div><div class="links"><a href="https://wig.cqzswd.com/" target="_blank" rel="noopener">在线 Demo ↗</a><span class="locked" title="https://github.com/zzbjll/wig-ai-tryon">代码仓库(私有,可授权查看)</span><span class="locked" title="https://github.com/zzbjll/wig-ai-tryon/blob/main/docs/serving.md">技术文档(私有,可授权查看)</span></div>
+<div class="links"><a href="https://wig.cqzswd.com/" target="_blank" rel="noopener">在线 Demo ↗</a><span class="locked" title="https://github.com/zzbjll/wig-ai-tryon">代码仓库(私有,可授权查看)</span><span class="locked" title="https://github.com/zzbjll/wig-ai-tryon/blob/main/docs/serving.md">技术文档(私有,可授权查看)</span></div>
 <details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:模型整图重画,脸会漂移;靠提示词约束不可靠</span><span class="a">做法:补边成 3:4 → 生成 → 裁回与原图逐像素对位 → 蒙版取「原图旧发区 ∪ 生成图新发 alpha」→ Image.composite 合成</span><span class="r">结果:脸区像素差 P99 5~8(对照 33),身份 cos 0.958~0.975(对照 0.894~0.918)—— 脸就是原照片像素</span></li><li><span class="q">问题:长 → 短换发后旧发残留晕影</span><span class="a">做法:蒙版并集 + ViTMatte 发丝级 alpha(分割定前景 / 背景核心,边缘带由 matting 逐像素判)</span><span class="r">结果:发缘干净,长 → 短无旧发残留</span></li><li><span class="q">问题:后处理 85s,拖慢出图体验</span><span class="a">做法:分割 512 → 256、matting 512 → 384(3x 放大逐区对照过视觉无差)</span><span class="r">结果:后处理 14.7s,公网端到端 48.0s;瓶颈只剩模型生成约 30s</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>指标与复跑命令 —— eval/report.md(本地零 API 花费可复跑);评测样本 4 对(服务器真实流量按 usage.log 自动成对归档,随流量增长)</li><li>接口 / 部署 / 性能口径 —— docs/serving.md;失败归因 —— docs/failure-analysis.md</li><li>机制 —— 回代码核实:face_lock.py:35-45(蒙版并集合成 + matting 失败退回羽化 mask 不中断)、hairmatte.py:41(trimap → ViTMatte)、server.py:30(并发闸 6 = 成本闸)、marker.py(显式角标 + EXIF/COM 隐式标识)</li></ul></details>
 </article><article class="card">
 <header><h3>金融导流平台(双产品线)</h3><span class="meta">重庆智识维度 · 技术负责人 · 2026.06-至今</span></header>
 <p class="tagline">上游流量 → 撞库 → 前筛 → 路由资方 → 授信 / 放款 → 双向对账,已上生产</p>
 <div class="chips"><span class="chip"><b>6.6s → 264ms</b> 撞库平均耗时<i>生产同窗口 A/B</i></span><span class="chip"><b>29.5s → 2.5s</b> 下游进件超时<i>ZQX test 同路径</i></span><span class="chip"><b>配置 + 实现类</b> 新渠道接入<i>核心域零改动</i></span></div>
-<div class="flow"><div class="fc">N×M 集成枢纽(防腐层 ACL)</div><div class="frow"><span class="fbox"><b>渠道 / 资方 N 家</b></span><span class="arr">→</span><span class="fbox"><b>Canonical 13 类模型</b><i>核心域只认它</i></span><span class="arr">→</span><span class="fbox"><b>适配器 SPI</b><i>按渠道类型索引</i></span><span class="arr">→</span><span class="fbox"><b>资方 / 渠道 M 家</b></span></div></div><div class="flow"><div class="fc">可靠投递(四类 Outbox)</div><div class="frow"><span class="fbox"><b>业务事务写 PENDING</b></span><span class="arr">→</span><span class="fbox"><b>后台批量投递</b></span><span class="arr">→</span><span class="fbox"><b>失败 → 逐行隔离重投</b><i>≤10 次</i></span><span class="arr">→</span><span class="fbox"><b>DEAD 死信</b><i>不拖垮全批</i></span></div></div>
+
 <details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:生产撞库雪崩:缺索引叠加超时重试正反馈,越慢越重试</span><span class="a">做法:索引 + 超时治理 + 三层弹性(有界池背压 / 每渠道熔断半开探测 / 线程池饱和回压)</span><span class="r">结果:平均耗时 6.6s → 264ms,峰值在途 72.9 → 3.24</span></li><li><span class="q">问题:渠道与资方差异持续扩散,N×M 手工适配改一处崩一片</span><span class="a">做法:核心域只认 13 类 Canonical 模型,差异收敛进适配器 SPI + 注册表</span><span class="r">结果:接新渠道 = 一条配置 + 一个实现 bean,核心域零改动</span></li><li><span class="q">问题:跨库双写会丢、双实例下日限额超发、账单对不平</span><span class="a">做法:四类 Outbox 至少一次投递 + 行级隔离重投 + DEAD 死信;Redis INCR 原子占额;实时流水 → 日终闭账 → 幂等净补差</span><span class="r">结果:账不平可定位到逐笔流水,改价当天回溯补差、历史留单价快照</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>生产口径与排查记录 —— 弹药库(脱敏;代码与截图不对外)</li><li>机制 —— 回代码核实:DownstreamAdapter.java(SPI)、ChannelAdapterRegistry.java、DownstreamDispatcher.java、DownstreamCircuitBreaker.java、DailyApplyLimiter.java、CkOutbox.java + CkOutboxDrainTask.java、recon/(实时计费 + 日终闭账)</li></ul></details>
 </article><article class="card">
 <header><h3>A 股量化研究系统(个人研究,未实盘)</h3><span class="meta">独立自建 · 独立 · 2025.12-2026.06</span></header>
 <p class="tagline">数据底座 + 撮合重构 + 三道防自欺闸门</p>
 <div class="chips"></div>
-<div class="flow"><div class="fc">数据底座 → 训练 → 放行闸</div><div class="frow"><span class="fbox"><b>数据底座 303 表</b><i>67 采集 · 314 cron</i></span><span class="arr">→</span><span class="fbox"><b>撮合引擎四层</b></span><span class="arr">→</span><span class="fbox"><b>walk-forward 训练</b><i>只重训过期窗</i></span><span class="arr">→</span><span class="fbox"><b>三道防自欺闸</b><i>DSR / PBO / ΔIC</i></span></div></div>
+
 <details><summary>问题 → 做法 → 结果</summary><ul class="hl"></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>口径 —— 弹药库/评审-量化平台(个人研究系统,未实盘)</li><li>规模数字回代码实测(2026-10-14):303 张表 = 第一方 .py 里 CREATE TABLE 去重(351 条语句,排除 tests/attic/docs/归档/venv);67 = tools/sync_*.py 计数;314 = config/cron/*.yaml 顶层条目;四层架构见 tools/trading/match_engine/__init__.py:3;2.29 亿行 / 82× 见 datalayer/ch/ddl/market_minute.py:26-29;908 万行 / 14ms 见 datalayer/ch/ddl/views.py:48-51</li><li>口径虚高数字回代码核实(2026-10-14):stacking -81%→-33% / 6.4→2.9 见 tools/lib/stats.py:139-146(overlap_aware_metrics);OLD_4 h5 2.37→~1.0 见 tools/lib/stats.py:35-41;三闸实现 deflated_sharpe 见 stats.py:65(Bailey &amp; López de Prado 2014)、pbo_cscv 见 stats.py:181(CSCV)、ΔIC 合取规则见 tools/agents/ensemble_ablation/runner.py:7,124。⚠️ 历史稿「Sharpe 2.37 / 回撤 -85% → 1.07 / -30%」把两个独立案例混成一条(-85%/-30% 查无出处),已按源码重写</li></ul></details>
 </article><article class="card">
 <header><h3>Agent 工具调用微调 —— 能力边界量化</h3><span class="meta">独立作品 · 独立完成 · 2026</span></header>
 <p class="tagline">小模型 + 轨迹 SFT 能学会什么、学不会什么 —— 三维度分离评测给出量化答案</p>
 <div class="chips"></div>
-<div class="flow"><div class="fc">合成 → 校验 → 训练 → 分离评测</div><div class="frow"><span class="fbox"><b>教师模型合成</b><i>1140 条轨迹</i></span><span class="arr">→</span><span class="fbox"><b>6 条规则校验</b><i>JSON / XML 双格式</i></span><span class="arr">→</span><span class="fbox"><b>Qwen3-0.6B LoRA</b><i>r=16 / α=32</i></span><span class="arr">→</span><span class="fbox"><b>三维度分离评测</b><i>格式 / 选择 / 答案</i></span></div></div><div class="links"><span class="locked" title="https://github.com/zzbjll/agent-toolcall-sft">代码仓库(私有,可授权查看)</span></div>
+<div class="links"><span class="locked" title="https://github.com/zzbjll/agent-toolcall-sft">代码仓库(私有,可授权查看)</span></div>
 <details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:小模型能否接住 Agent 工具调用、SFT 能解决哪一层</span><span class="a">做法:合成 1140 条轨迹 + LoRA 微调 + 三维度分离评测(格式 / 选择 / 答案不混成一个分)</span><span class="r">结果:格式 20/20 全学会、工具选择 2/10 学不动 —— 边界量化,指导选型</span></li><li><span class="q">问题:全参微调显存吃紧、单卡跑不动</span><span class="a">做法:DeepSpeed ZeRO-2 切优化器状态与梯度,2 卡跑通;merge_and_unload 合回基座(推理零开销)</span><span class="r">结果:2207 条全参对照跑通,checkpoint 在案</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>工程与数据 —— train_project(11 个脚本 + 1140 条轨迹数据 wc -l 实测 + 三维度评测报告);超参回代码核实:scripts/02_train.py:55-68(max_length 8192 / batch 1 / accum 8 / 3 epoch / lr 2e-5 / r=16 / α=32)、:131(7 个 target modules)、:150-151(cosine + warmup_ratio 0.1);数据校验 6 条规则:src/data/schema_v2.py:195-255(JSON/XML 双格式支持 :221-225);对话拆分 + 末轮加权:Agent+SFT/conversation_splitter.py:1-12;评测集构造:build_before_after_judged_set.py(target-count 10,从训练集经 LLM 评审挑「前后差异明显」样本 —— 评测数字按此口径解读,非泛化评测)</li><li>评测数字 —— reports/training_before_after_summary.md(格式 4/20→20/20、工具选择 0/10→2/10、答案正确 0/10→2/10、完整度 0%→17%)</li><li>全参工程 —— Agent+SFT(README 三路径:LoRA / 合并 / 全参);超参回代码核实:run_train_full_finetune.sh(max_seq 14096 / accum 16 / bf16 / gradient_checkpointing / warmup 0.03)、merge_lora_into_base.py(merge_and_unload + safe_serialization);数据规模实测:merged_train_final_multiturn_v2.json 2207 条</li><li>分布式 —— 第11周工程:train.py(DeepSpeedPlugin zero_stage=2 + gradient_clipping=1.0 + Accelerator)、my_accelerate_config.yaml(distributed_type DEEPSPEED / num_processes 2);真训练产物 trainer_output/checkpoint-471/500/1000/1500/1875 + runs/ + saved_model/</li></ul></details>
 </article>
-<h2>十年轨迹</h2><div class="tl"><button class="tln" data-d="徐州工程学院 · 计算机科学与技术(统招全日制,2012.09-2016.06)"><b>2012</b><span>本科 · 计算机</span></button><button class="tln" data-d="上海广升 / 上海致宇 · 系统工具后端与银行方向 Java 开发(2016.07-2018.07)"><b>2016</b><span>入行 Java</span></button><button class="tln" data-d="上海盛大汽车 · 金融租赁平台;呼叫中心与通知链路(双呼、幂等去重)、存储过程 Java 化(2018.07-2020.05)"><b>2018</b><span>金融租赁</span></button><button class="tln" data-d="豌豆思维 · 运营中台:订单分表与 ES 检索链路、质检批处理链路(2020.11-2021.11)"><b>2020</b><span>运营中台</span></button><button class="tln" data-d="小象优品 · Java 资深开发:0-1 组建金融技术团队;消费金融核心链路、多家资产 / 资金方接入、扣款时序与分布式锁治理(2021.12-2025.11)"><b>2021</b><span>0-1 带团队</span></button><button class="tln" data-d="兼 Agent 平台核心开发:意图路由 / 工具编排 / 4 条权限闸 / 三层幻觉守门,45 条离线评测集"><b>2024.06</b><span>转 AI</span></button><button class="tln" data-d="史蒂文斯理工学院 · 计算机科学硕士,AI 方向(2025.09-2027.06)"><b>2025.09</b><span>硕士(在读)</span></button><button class="tln" data-d="A 股量化研究系统:303 张表数据底座 + 三道防自欺闸(个人研究,未实盘)"><b>2025.12</b><span>量化自研</span></button><button class="tln" data-d="重庆智识维度 · 贷超导流双产品线全链路(已上生产)+ AI 基建主导"><b>2026.06</b><span>技术负责人</span></button><button class="tln" data-d="LLM 网关与长时记忆系统上线:5 厂商 / 12 模型;P@1 0.853 → 0.907"><b>2026.07</b><span>AI 基建</span></button><button class="tln on" data-d="假发 AI 试戴公网上线(不换脸管线);Agent 工具调用微调 —— 能力边界量化"><b>2026.10</b><span>多模态上线</span></button></div><div class="tld" id="tld">假发 AI 试戴公网上线(不换脸管线);Agent 工具调用微调 —— 能力边界量化</div>
-<h2>在线实况</h2><div class="live"><div class="phone"><iframe src="https://wig.cqzswd.com/" loading="lazy" title="发型试衣间 · 传张照片看效果"></iframe></div><div class="lvtxt"><p class="lvt">发型试衣间 —— 假发 AI 试戴(自有业务线,公网运行)</p><p class="lvd">不换脸管线:只换发型,脸 / 身体 / 背景保持原照片像素(脸区像素差 P99 5~8,对照仅提示词约束为 33)。左侧是可交互的真实服务(首次加载约几秒)—— 上传一张照片,当场出图,不是录屏。</p><div class="links"><a href="https://wig.cqzswd.com/" target="_blank" rel="noopener">打开完整版 ↗</a></div></div></div>
-<footer>本页由 facts.yaml 生成(v21-20261014);改源不改稿;数字均可溯源。
+<footer>本页由 facts.yaml 生成(v21-20261014);改源不改稿。
 <a href="https://zzbjll.github.io/resume">完整简历 ↗</a></footer>
-</div><script>
-(function(){
-  var tl=document.querySelector('.tl');
-  if(tl){
-    tl.addEventListener('click',function(e){
-      var b=e.target.closest('.tln'); if(!b) return;
-      tl.querySelectorAll('.tln').forEach(function(x){x.classList.toggle('on',x===b);});
-      var d=document.getElementById('tld'); if(d) d.textContent=b.getAttribute('data-d');
-    });
-    tl.scrollLeft=tl.scrollWidth; /* 默认选中最新节点,滚到可见 */
-  }
-  var bars=document.querySelectorAll('.bar i');
-  if(!('IntersectionObserver' in window)||!bars.length) return;
-  var obs=new IntersectionObserver(function(es){es.forEach(function(en){
-    if(!en.isIntersecting) return;
-    var b=en.target, w=b.getAttribute('data-w');
-    b.style.transition='none'; b.style.width='0%';
-    requestAnimationFrame(function(){ b.style.transition=''; b.style.width=w+'%'; });
-    obs.unobserve(b);
-  });},{threshold:.4});
-  bars.forEach(function(b){ b.setAttribute('data-w', parseFloat(b.style.width)||0); obs.observe(b); });
-})();
-</script></body></html>
+</div></body></html>
