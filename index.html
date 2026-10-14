@@ -56,7 +56,6 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <p>plan-execute 编排 + 权限闸 + 三层幻觉守门,内部与外部双入口</p>
 <ul>
 <li><strong>意图路由与工具编排</strong>:规则基线误路由偏高 → plan-execute 执行链 + 4 条权限闸 + 连续澄清 3 次自动转人工 → 意图识别 <strong>70% → 90%</strong>(45 条种子 case 离线回放,route 与 tool 双对才算对)</li>
-<li><strong>失败可观测</strong>:内部工具失败被吞成「未命中模板」→ 工具失败统一出口透传错误 + route=error,API 层状态跟路由走 → 失败不再静默兜底(已补回归测试)</li>
 <li><strong>安全合规</strong>:两套系统提示词共 <strong>13 条</strong>强制约束(业务 8 + 知识 5)+ 内 / 外 / 用户三级可见性 + 审计脱敏</li>
 </ul>
 <div class="item"><span>假发 AI 试戴(在线作品) ｜ 独立作品 · 自有业务线 · 设计 + 开发 + 上线 独立完成</span><span class="date">2026.10</span></div>
@@ -64,7 +63,7 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <ul>
 <li><strong>问题</strong>:模型整图重画,脸会漂移(提示词级约束不可靠)→ 补边 → ARK 生成 → 裁回 → 蒙版并集 → ViTMatte 发丝级 alpha → Image.composite 合成 → 脸区像素差降到 JPEG 噪声级(<strong>P99 5~8 vs 对照 33</strong>)</li>
 <li><strong>发缘质量</strong>:羽化蒙版会透出旧发晕影 → 蒙版取「原图旧发羽化区 ∪ 生成图新发 alpha」并集 + 发丝级 matting → 长→短换发无残留</li>
-<li><strong>性能与上线</strong>:后处理 85s → <strong>14.7s</strong>(分割 512→256 提速 8.7×、matting 512→384 提速 3.2×);公网端到端 <strong>48.0s</strong>;并发闸 6 控成本、失败降级不中断、AI 生成标识(显式角标 + EXIF/COM 隐式)</li>
+<li><strong>性能与上线</strong>:后处理 85s → <strong>14.7s</strong>(分割 512→256 提速 8.7×、matting 512→384 提速 3.2×);公网端到端 <strong>48.0s</strong>;并发闸 6 控成本 + AI 生成标识(显式角标 + EXIF/COM 隐式)</li>
 </ul>
 <div class="item"><span>金融导流平台(双产品线) ｜ 重庆智识维度 · 技术负责人</span><span class="date">2026.06-至今</span></div>
 <p>上游流量 → 撞库 → 前筛 → 路由资方 → 授信 / 放款 → 双向对账,已上生产</p>
@@ -135,7 +134,6 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <p>plan-execute 编排 + 权限闸 + 三层幻觉守门,内部与外部双入口</p>
 <ul>
 <li><strong>意图路由与工具编排</strong>:规则基线误路由偏高 → plan-execute 执行链 + 4 条权限闸 + 连续澄清 3 次自动转人工 → 意图识别 <strong>70% → 90%</strong>(45 条种子 case 离线回放,route 与 tool 双对才算对)</li>
-<li><strong>失败可观测</strong>:内部工具失败被吞成「未命中模板」→ 工具失败统一出口透传错误 + route=error,API 层状态跟路由走 → 失败不再静默兜底(已补回归测试)</li>
 <li><strong>安全合规</strong>:两套系统提示词共 <strong>13 条</strong>强制约束(业务 8 + 知识 5)+ 内 / 外 / 用户三级可见性 + 审计脱敏</li>
 </ul>
 <div class="item"><span>金融导流平台(双产品线) ｜ 重庆智识维度 · 技术负责人</span><span class="date">2026.06-至今</span></div>
@@ -205,7 +203,7 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <ul>
 <li><strong>问题</strong>:模型整图重画,脸会漂移(提示词级约束不可靠)→ 补边 → ARK 生成 → 裁回 → 蒙版并集 → ViTMatte 发丝级 alpha → Image.composite 合成 → 脸区像素差降到 JPEG 噪声级(<strong>P99 5~8 vs 对照 33</strong>)</li>
 <li><strong>发缘质量</strong>:羽化蒙版会透出旧发晕影 → 蒙版取「原图旧发羽化区 ∪ 生成图新发 alpha」并集 + 发丝级 matting → 长→短换发无残留</li>
-<li><strong>性能与上线</strong>:后处理 85s → <strong>14.7s</strong>(分割 512→256 提速 8.7×、matting 512→384 提速 3.2×);公网端到端 <strong>48.0s</strong>;并发闸 6 控成本、失败降级不中断、AI 生成标识(显式角标 + EXIF/COM 隐式)</li>
+<li><strong>性能与上线</strong>:后处理 85s → <strong>14.7s</strong>(分割 512→256 提速 8.7×、matting 512→384 提速 3.2×);公网端到端 <strong>48.0s</strong>;并发闸 6 控成本 + AI 生成标识(显式角标 + EXIF/COM 隐式)</li>
 </ul>
 <div class="item"><span>企业级 LLM 网关与长时记忆 ｜ 同司 AI 基建 · 主导</span><span class="date">2026.07-至今</span></div>
 <p>多厂商网关(换厂商不改代码)+ 长时记忆(事件溯源 + 双臂召回)</p>
@@ -219,7 +217,6 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <p>plan-execute 编排 + 权限闸 + 三层幻觉守门,内部与外部双入口</p>
 <ul>
 <li><strong>意图路由与工具编排</strong>:规则基线误路由偏高 → plan-execute 执行链 + 4 条权限闸 + 连续澄清 3 次自动转人工 → 意图识别 <strong>70% → 90%</strong>(45 条种子 case 离线回放,route 与 tool 双对才算对)</li>
-<li><strong>失败可观测</strong>:内部工具失败被吞成「未命中模板」→ 工具失败统一出口透传错误 + route=error,API 层状态跟路由走 → 失败不再静默兜底(已补回归测试)</li>
 <li><strong>安全合规</strong>:两套系统提示词共 <strong>13 条</strong>强制约束(业务 8 + 知识 5)+ 内 / 外 / 用户三级可见性 + 审计脱敏</li>
 </ul>
 <div class="item"><span>A 股量化研究系统(个人研究,未实盘) ｜ 独立自建 · 独立</span><span class="date">2025.12-2026.06</span></div>
@@ -296,7 +293,6 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <p>plan-execute 编排 + 权限闸 + 三层幻觉守门,内部与外部双入口</p>
 <ul>
 <li><strong>意图路由与工具编排</strong>:规则基线误路由偏高 → plan-execute 执行链 + 4 条权限闸 + 连续澄清 3 次自动转人工 → 意图识别 <strong>70% → 90%</strong>(45 条种子 case 离线回放,route 与 tool 双对才算对)</li>
-<li><strong>失败可观测</strong>:内部工具失败被吞成「未命中模板」→ 工具失败统一出口透传错误 + route=error,API 层状态跟路由走 → 失败不再静默兜底(已补回归测试)</li>
 <li><strong>安全合规</strong>:两套系统提示词共 <strong>13 条</strong>强制约束(业务 8 + 知识 5)+ 内 / 外 / 用户三级可见性 + 审计脱敏</li>
 </ul>
 <div class="item"><span>A 股量化研究系统(个人研究,未实盘) ｜ 独立自建 · 独立</span><span class="date">2025.12-2026.06</span></div>
