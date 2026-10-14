@@ -224,7 +224,7 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <div class="item"><span>LLM 微调实践(轨迹 SFT / LoRA) ｜ 个人实践 · 独立完成</span><span class="date">2026</span></div>
 <p>轨迹数据构造 → LoRA 微调 → 三维度评测,量化出小模型的能力边界</p>
 <ul>
-<li><strong>数据与训练</strong>:1140 条 Deep Research Agent 轨迹(问题 → 工具调用 → 答案),含工具调用 JSON 规范化 / 对话切分 / gold_paths 标注;Qwen3-0.6B + peft LoRA(r=16 / α=32,7 个 target module),8192 序列 / batch 1 × 累积 8 / 3 epoch / lr 2e-5;另套旅行助手多轮数据 2207 条上做全参对照(14096 + bf16 + gradient checkpointing)+ `merge_and_unload` 合回基座</li>
+<li><strong>数据与训练</strong>:1140 条 Deep Research Agent 轨迹(问题 → 工具调用 → 答案),含工具调用 JSON 规范化 / 对话切分 / gold_paths 标注;Qwen3-0.6B + peft LoRA(r=16 / α=32,7 个 target module),8192 序列 / batch 1 × 累积 8 / 3 epoch / lr 2e-5;另套旅行助手多轮数据 2207 条上做全参对照(14096 + bf16 + gradient checkpointing)+ <strong>Accelerate / DeepSpeed ZeRO-2 双卡分布式</strong> + `merge_and_unload` 合回基座</li>
 <li><strong>评测与边界</strong>:三维度分离评测(格式 / 工具选择 / 答案正确)→ 格式 <strong>4/20 → 20/20</strong>,工具选择 <strong>0/10 → 2/10</strong>、答案正确 <strong>0/10 → 2/10</strong> → 量化出「0.6B 学得会格式、学不动工具选择」的边界</li>
 </ul>
 <div class="item"><span>A 股量化研究系统(个人研究,未实盘) ｜ 独立自建 · 独立</span><span class="date">2025.12-2026.06</span></div>
