@@ -148,7 +148,7 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <div class="item"><span>A 股量化研究系统(个人研究,未实盘) ｜ 独立自建 · 独立</span><span class="date">2025.12-2026.06</span></div>
 <p>数据底座 + 撮合重构 + 三道防自欺闸门</p>
 <ul>
-<li><strong>数据底座</strong>:ClickHouse <strong>218 张表</strong>(DDL 模块实测)/ <strong>67</strong> 条采集脚本 / <strong>314</strong> 条 cron 任务;撮合引擎四层架构重构(抽象层 + 数据源 + 三种撮合实现 + 注册表)</li>
+<li><strong>数据底座</strong>:ClickHouse <strong>303 张表</strong>(第一方代码建表去重实测)/ <strong>67</strong> 条采集脚本 / <strong>314</strong> 条 cron 任务;撮合引擎四层架构重构(抽象层 + 数据源 + 三种撮合实现 + 注册表)</li>
 <li><strong>热点查询治理</strong>:min5 主键索引降级成全表扫 <strong>2.29 亿行</strong>(2.3s)→ 加进度加速表 + 物化视图自动维护 → <strong>28ms(82×)</strong>;物化 PIT 视图 <strong>908 万行</strong>改查索引后 <strong>14ms(约 10×)</strong></li>
 <li><strong>三道硬闸</strong>(DSR / PBO / ΔIC)拦下回测口径虚高的模型:旧口径 Sharpe 2.37 / 回撤 -85% 实为把重叠收益当 1 日复利,校正后 1.07 / -30%,无 alpha → 拒绝上线</li>
 </ul>
@@ -223,7 +223,7 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <div class="item"><span>A 股量化研究系统(个人研究,未实盘) ｜ 独立自建 · 独立</span><span class="date">2025.12-2026.06</span></div>
 <p>数据底座 + 撮合重构 + 三道防自欺闸门</p>
 <ul>
-<li><strong>数据底座</strong>:ClickHouse <strong>218 张表</strong>(DDL 模块实测)/ <strong>67</strong> 条采集脚本 / <strong>314</strong> 条 cron 任务;撮合引擎四层架构重构(抽象层 + 数据源 + 三种撮合实现 + 注册表)</li>
+<li><strong>数据底座</strong>:ClickHouse <strong>303 张表</strong>(第一方代码建表去重实测)/ <strong>67</strong> 条采集脚本 / <strong>314</strong> 条 cron 任务;撮合引擎四层架构重构(抽象层 + 数据源 + 三种撮合实现 + 注册表)</li>
 <li><strong>热点查询治理</strong>:min5 主键索引降级成全表扫 <strong>2.29 亿行</strong>(2.3s)→ 加进度加速表 + 物化视图自动维护 → <strong>28ms(82×)</strong>;物化 PIT 视图 <strong>908 万行</strong>改查索引后 <strong>14ms(约 10×)</strong></li>
 <li><strong>三道硬闸</strong>(DSR / PBO / ΔIC)拦下回测口径虚高的模型:旧口径 Sharpe 2.37 / 回撤 -85% 实为把重叠收益当 1 日复利,校正后 1.07 / -30%,无 alpha → 拒绝上线</li>
 </ul>
@@ -300,7 +300,7 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <div class="item"><span>A 股量化研究系统(个人研究,未实盘) ｜ 独立自建 · 独立</span><span class="date">2025.12-2026.06</span></div>
 <p>数据底座 + 撮合重构 + 三道防自欺闸门</p>
 <ul>
-<li><strong>数据底座</strong>:ClickHouse <strong>218 张表</strong>(DDL 模块实测)/ <strong>67</strong> 条采集脚本 / <strong>314</strong> 条 cron 任务;撮合引擎四层架构重构(抽象层 + 数据源 + 三种撮合实现 + 注册表)</li>
+<li><strong>数据底座</strong>:ClickHouse <strong>303 张表</strong>(第一方代码建表去重实测)/ <strong>67</strong> 条采集脚本 / <strong>314</strong> 条 cron 任务;撮合引擎四层架构重构(抽象层 + 数据源 + 三种撮合实现 + 注册表)</li>
 <li><strong>热点查询治理</strong>:min5 主键索引降级成全表扫 <strong>2.29 亿行</strong>(2.3s)→ 加进度加速表 + 物化视图自动维护 → <strong>28ms(82×)</strong>;物化 PIT 视图 <strong>908 万行</strong>改查索引后 <strong>14ms(约 10×)</strong></li>
 <li><strong>三道硬闸</strong>(DSR / PBO / ΔIC)拦下回测口径虚高的模型:旧口径 Sharpe 2.37 / 回撤 -85% 实为把重叠收益当 1 日复利,校正后 1.07 / -30%,无 alpha → 拒绝上线</li>
 </ul>
@@ -362,7 +362,7 @@ p{font-size:13px;line-height:1.6;margin:3px 0;}
 <div class="item"><span>A 股量化研究系统(个人研究,未实盘) ｜ 独立自建 · 独立</span><span class="date">2025.12-2026.06</span></div>
 <p>数据底座 + 撮合重构 + 三道防自欺闸门</p>
 <ul>
-<li><strong>数据底座</strong>:ClickHouse <strong>218 张表</strong>(DDL 模块实测)/ <strong>67</strong> 条采集脚本 / <strong>314</strong> 条 cron 任务;撮合引擎四层架构重构(抽象层 + 数据源 + 三种撮合实现 + 注册表)</li>
+<li><strong>数据底座</strong>:ClickHouse <strong>303 张表</strong>(第一方代码建表去重实测)/ <strong>67</strong> 条采集脚本 / <strong>314</strong> 条 cron 任务;撮合引擎四层架构重构(抽象层 + 数据源 + 三种撮合实现 + 注册表)</li>
 <li><strong>热点查询治理</strong>:min5 主键索引降级成全表扫 <strong>2.29 亿行</strong>(2.3s)→ 加进度加速表 + 物化视图自动维护 → <strong>28ms(82×)</strong>;物化 PIT 视图 <strong>908 万行</strong>改查索引后 <strong>14ms(约 10×)</strong></li>
 <li><strong>三道硬闸</strong>(DSR / PBO / ΔIC)拦下回测口径虚高的模型:旧口径 Sharpe 2.37 / 回撤 -85% 实为把重叠收益当 1 日复利,校正后 1.07 / -30%,无 alpha → 拒绝上线</li>
 </ul>
