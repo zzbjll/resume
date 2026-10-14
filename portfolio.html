@@ -61,7 +61,7 @@ footer a{color:var(--navy);}
 <div class="chips"></div>
 
 <details><summary>问题 → 做法 → 结果</summary><ul class="hl"></ul></details>
-<details><summary>证据(可核验)</summary><ul class="ev"><li>评测口径与样本量 —— 弹药库/面试分层应答(70→90% 口径;1,200+ 为累计标注口径,不主动报)</li><li>13 条约束 —— 回代码核实:llm_client.py:24-44(业务 8 条 + 知识 5 条)</li><li>回归测试 —— pytest tests/(54 passed)</li></ul></details>
+<details><summary>证据(可核验)</summary><ul class="ev"><li>评测 —— 回代码核实:docs/tool_eval_dataset.json(45 条)、scripts/run_tool_eval.py(route / tool / combo 三指标)。⚠️ 历史稿「70%→90%」查无产物、复现不出,已删;--fast 模式 matched_tools/matched_combo 在 ef() 里硬编码为 True,不引用其分数</li><li>13 条约束 —— 回代码核实:llm_client.py:24-44(业务 8 条 + 知识 5 条)</li><li>4 条权限闸 —— packages/core/tooling.py:98-112(scope 隔离 / 认证 / 用户 / 高风险显式放行)</li><li>回归测试 —— pytest tests/(54 passed)</li></ul></details>
 </article><article class="card">
 <header><h3>假发 AI 试戴(在线作品)</h3><span class="meta">独立作品 · 自有业务线 · 设计 + 开发 + 上线 独立完成 · 2026.10</span></header>
 <p class="tagline">不换脸管线 —— 只换发型,脸 / 身体 / 背景保持原照片像素</p>
@@ -82,7 +82,7 @@ footer a{color:var(--navy);}
 <div class="chips"></div>
 
 <details><summary>问题 → 做法 → 结果</summary><ul class="hl"></ul></details>
-<details><summary>证据(可核验)</summary><ul class="ev"><li>口径 —— 弹药库/评审-量化平台(个人研究系统,未实盘)</li><li>规模数字回代码实测(2026-10-14):303 张表 = 第一方 .py 里 CREATE TABLE 去重(351 条语句,排除 tests/attic/docs/归档/venv);67 = tools/sync_*.py 计数;314 = config/cron/*.yaml 顶层条目;四层架构见 tools/trading/match_engine/__init__.py:3;2.29 亿行 / 82× 见 datalayer/ch/ddl/market_minute.py:26-29;908 万行 / 14ms 见 datalayer/ch/ddl/views.py:48-51</li></ul></details>
+<details><summary>证据(可核验)</summary><ul class="ev"><li>口径 —— 弹药库/评审-量化平台(个人研究系统,未实盘)</li><li>规模数字回代码实测(2026-10-14):303 张表 = 第一方 .py 里 CREATE TABLE 去重(351 条语句,排除 tests/attic/docs/归档/venv);67 = tools/sync_*.py 计数;314 = config/cron/*.yaml 顶层条目;四层架构见 tools/trading/match_engine/__init__.py:3;2.29 亿行 / 82× 见 datalayer/ch/ddl/market_minute.py:26-29;908 万行 / 14ms 见 datalayer/ch/ddl/views.py:48-51</li><li>口径虚高数字回代码核实(2026-10-14):stacking -81%→-33% / 6.4→2.9 见 tools/lib/stats.py:139-146(overlap_aware_metrics);OLD_4 h5 2.37→~1.0 见 tools/lib/stats.py:35-41;三闸实现 deflated_sharpe 见 stats.py:65(Bailey &amp; López de Prado 2014)、pbo_cscv 见 stats.py:181(CSCV)、ΔIC 合取规则见 tools/agents/ensemble_ablation/runner.py:7,124。⚠️ 历史稿「Sharpe 2.37 / 回撤 -85% → 1.07 / -30%」把两个独立案例混成一条(-85%/-30% 查无出处),已按源码重写</li></ul></details>
 </article>
 <footer>本页由 facts.yaml 生成(v21-20261014);改源不改稿。
 <a href="https://zzbjll.github.io/resume">完整简历 ↗</a></footer>
