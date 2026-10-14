@@ -11,7 +11,9 @@ h1{font-size:27px;color:var(--navy);margin:0 0 4px;}
 .tagline{font-size:13.5px;color:#333;margin:0 0 6px;}
 .contact{font-size:12px;color:var(--gray);margin:0 0 16px;}
 .contact a{color:var(--navy);text-decoration:none;}
-.digits{display:flex;flex-wrap:wrap;gap:10px;background:var(--band);border-radius:4px;padding:10px 12px;margin:0 0 22px;}
+.digits{display:flex;flex-wrap:wrap;gap:10px;background:var(--band);border-radius:4px;padding:10px 12px;margin:0 0 10px;}
+.track{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:var(--gray);margin:0 0 20px;padding:0 2px;}
+.track b{color:var(--navy);font-weight:bold;margin-right:4px;}
 .digit{font-size:12px;color:var(--gray);}
 .digit b{display:block;font-size:16px;color:var(--navy);}
 h2{font-size:15px;color:var(--navy);border-bottom:1px solid var(--navy);padding-bottom:4px;margin:22px 0 12px;}
@@ -44,6 +46,7 @@ footer a{color:var(--navy);}
 <p class="tagline">把 AI 落成能扛生产的系统 —— LLM 网关 / Agent 平台 / 多模态应用均已上线;底座是 10 年后端架构与稳定性治理</p>
 <p class="contact">电话 15221599617 · 邮箱 zhangjianle617@163.com · <a href="https://zzbjll.github.io/resume">https://zzbjll.github.io/resume</a></p>
 <div class="digits"><div class="digit"><b>10 年</b>后端与架构</div><div class="digit"><b>近 3 年</b>AI 应用落地</div><div class="digit"><b>三次</b>0-1 生产系统</div><div class="digit"><b>6.6s → 264ms</b>稳定性治理</div></div>
+<div class="track"><span><b>2024.06</b>Agent 应用层:意图路由 / 工具编排 / 幻觉守门</span><span><b>2026.07</b>AI 基建层:LLM 网关 / 长时记忆 / 多租户</span><span><b>2026.10</b>多模态产品层:生成质量可量化 / 合规上线</span></div>
 <h2>项目</h2>
 <article class="card">
 <header><h3>假发 AI 试戴</h3><span class="meta">独立作品(自有业务线) · 设计 + 开发 + 上线 独立完成 · 2026.10</span></header>
@@ -59,6 +62,13 @@ footer a{color:var(--navy);}
 
 <details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:规则基线误路由偏高,答非所问</span><span class="a">做法:意图路由 + 澄清策略 + 连续澄清 3 次自动转人工</span><span class="r">结果:意图识别 70% → 90%(45 条种子 case 评测)</span></li><li><span class="q">问题:工具失败被吞成「未命中模板」,错误不可见</span><span class="a">做法:工具失败统一出口透传错误 + route=error,API 层状态跟路由走</span><span class="r">结果:失败可观测,不再静默兜底</span></li><li><span class="q">问题:编造与越权风险</span><span class="a">做法:三层幻觉守门 + 内/外/用户三级可见性 + 审计脱敏</span><span class="r">结果:生产可用</span></li></ul></details>
 <details><summary>证据(可核验)</summary><ul class="ev"><li>评测口径与样本量 —— 弹药库/面试分层应答(70→90% 口径)</li><li>回归测试 —— pytest tests/(54 passed,含澄清连击转人工与工具失败 error 两条新回归)</li></ul></details>
+</article><article class="card">
+<header><h3>企业级 LLM 网关与长时记忆</h3><span class="meta">同司 AI 基建 · 主导 · 2026.07-至今</span></header>
+<p class="tagline">多厂商网关(换厂商不改代码)+ 长时记忆(事件溯源 + 双臂召回)</p>
+<div class="chips"><span class="chip"><b>30.1s → 3.6s</b> 网关端到端<i>两个独立根因,分段计时定位</i></span><span class="chip"><b>0.853 → 0.907</b> 记忆 P@1<i>n=75 同口径 A/B</i></span><span class="chip"><b>-60%</b> 单会话成本<i>档位路由(轻/重模型),按单价×用量可推导</i></span></div>
+
+<details><summary>问题 → 做法 → 结果</summary><ul class="hl"><li><span class="q">问题:请求路径三处同步阻塞,端到端 30s 级</span><span class="a">做法:全异步化 + 连接池 + 用量写库转后台队列</span><span class="r">结果:端到端 30.1s → 3.6s(分段计时才定位到写库那 120ms)</span></li><li><span class="q">问题:单臂向量召回不足</span><span class="a">做法:事件溯源(纯追加 SSOT + 投影)+ 词法/向量双臂 RRF 融合 + 强命中保护</span><span class="r">结果:P@1 0.853 → 0.907(n=75 同口径 A/B)</span></li><li><span class="q">问题:多租户与成本失控风险</span><span class="a">做法:语义档位路由(轻/重模型)+ 配额与密钥隔离 + 蓝绿零断流</span><span class="r">结果:单会话成本 -60%</span></li></ul></details>
+<details><summary>证据(可核验)</summary><ul class="ev"><li>性能与召回口径 —— 弹药库/评审-贷超与AI基建(分段计时 TSV、gate_rerank 改造)</li><li>P@1 基线以 n=75 同口径 A/B 为准;历史稿的 0.45 基线查无出处,已弃用</li></ul></details>
 </article><article class="card">
 <header><h3>金融导流平台(双产品线)</h3><span class="meta">重庆智识维度 · 技术负责人 · 2026.06-至今</span></header>
 <p class="tagline">上游流量 → 撞库 → 前筛 → 路由资方 → 授信 / 放款 → 双向对账,已上生产</p>
