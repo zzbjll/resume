@@ -60,20 +60,20 @@ h1{font-size:50px;line-height:1.24;font-weight:800;letter-spacing:1px;max-width:
     <a class="work" href="#p-agent"><span class="w1">AI 员工(智能体)平台<span>自研</span></span><span class="w2">内核提供闸门 / 幂等 / 预算 / 审计轨迹,业务以插件接入;换领域不改内核</span></a>
     <a class="work" href="#p-agentfin"><span class="w1">金融智能问答 Agent 平台<span>公司级生产</span></span><span class="w2">小象优品 · 主导设计:双入口生产问答,4 条权限闸 + 三层幻觉守门;45 条评测 + 54 项回归</span></a>
     <a class="work" href="#p-gateway"><span class="w1">企业级 LLM 网关<span>生产</span></span><span class="w2">5 厂商 12 模型统一接入,为 9 个客户端提供调用、档位路由与成本计量</span></a>
-    <a class="work" href="#p-memory"><span class="w1">长时记忆与召回<span>运行中</span></span><span class="w2">事件溯源存储 + 双臂 RRF 召回;用数据关停负贡献组件、自查评测集泄漏</span></a>
+    <a class="work" href="#p-memory"><span class="w1">长时记忆与召回<span>运行中</span></span><span class="w2">事件溯源存储 + 双臂 RRF 召回;端到端 P@1 0.853 → 0.907</span></a>
     <a class="work" href="#p-loan"><span class="w1">金融导流平台<span>生产</span></span><span class="w2">贷超导流全链路(撞库 / 前筛 / 授信 / 放款 / 对账)与稳定性治理</span></a>
     <a class="work" href="#p-sui"><span class="w1">渠道接入 AI 工作台<span>交付验收</span></span><span class="w2">渠道接入从 4 周人工做成九阶段流水线;LLM 仅 3 处介入,判定 100% 程序化</span></a>
     <a class="work" href="#p-wig"><span class="w1">多模态虚拟试戴<span>公网运营</span></span><span class="w2">不换脸合成管线:脸、身体、背景全部用原图像素,脸区像素差 P99 5~8</span></a>
-    <a class="work" href="#p-quant"><span class="w1">量化交易系统<span>自研</span></span><span class="w2">先校尺子再量策略:防自欺三闸(DSR / PBO / ΔIC),没有 edge 就不放行</span></a>
+    <a class="work" href="#p-quant"><span class="w1">量化交易系统<span>自研</span></span><span class="w2">ClickHouse 数据底座 + 撮合引擎;三闸合取(DSR / PBO-CSCV / ΔIC)不达标不放行</span></a>
   </div>
 </section>
 
 <section class="case" id="p-agent">
-  <div class="chead"><span class="cno">案例 01</span><h2>AI 员工(智能体)平台</h2><span class="cmeta">自研 · 2026 · 三岗位 100 单实测</span></div>
-  <p class="lede">内核提供「怎么干活」的通用机制——工具注册、闸门、幂等、预算、审计轨迹;业务判定全部由插件提供。三个完全不同的岗位(贷款 / 对账 / 风控)跑在同一内核上,<b>后两个岗位交付时内核一行没改(有 git 记录)</b>。</p>
+  <div class="chead"><span class="cno">案例 01</span><h2>AI 员工(智能体)平台</h2><span class="cmeta">自研 · 2026 · 四岗位同内核实测</span></div>
+  <p class="lede">内核提供「怎么干活」的通用机制——工具注册、闸门、幂等、预算、审计轨迹;业务判定全部由插件提供。四个完全不同的岗位(贷款 / 对账 / 风控 / 口径问答)跑在同一内核上,<b>后两次交付(风控 / 问答)内核一行没改(有 git 记录)</b>。</p>
   <div class="figure">
     <div class="flow">
-      <div class="fnode"><div class="ft">岗位插件</div><div class="fd">贷款 · 对账 · 风控,即插即用;内核零改动</div></div>
+      <div class="fnode"><div class="ft">岗位插件</div><div class="fd">贷款 · 对账 · 风控 · 问答,即插即用</div></div>
       <div class="farrow">→</div>
       <div class="fnode"><div class="ft">agentcore 内核</div><div class="fd">注册 · 预算 · 幂等 · 轨迹</div></div>
       <div class="farrow">→</div>
@@ -83,14 +83,14 @@ h1{font-size:50px;line-height:1.24;font-weight:800;letter-spacing:1px;max-width:
       <div class="farrow">→</div>
       <div class="fnode"><div class="ft">审计轨迹</div><div class="fd">append-only + 哈希链,改一条即被发现</div></div>
     </div>
-    <div class="fnote"><span><span class="dot">◆</span>蓝框 = <b>判定点</b>:模型只写给人看的说明,判定全是确定性规则</span><span><span class="dot">◆</span>岗位二 / 三交付 <b>agentcore 零 diff</b>(git 可查)</span></div>
+    <div class="fnote"><span><span class="dot">◆</span>蓝框 = <b>判定点</b>:模型只写给人看的说明,判定全是确定性规则</span><span><span class="dot">◆</span>岗位三 / 四交付提交里 <b>agentcore 零 diff</b>(git 可查)</span></div>
   </div>
   <div class="designs">
     <div class="design"><h4><em>01</em>内核边界</h4><p>内核不 import 任何插件,有测试把「平台边界」变成可执行断言;换领域需要动内核 = 契约错了,不是加分支。</p></div>
     <div class="design"><h4><em>02</em>判定权在闸门</h4><p>工具用声明表达门禁(money / risk_policy);内核在调用前问闸,测试断言不过闸时 handler 一次都没被调用。</p></div>
     <div class="design"><h4><em>03</em>幂等与审计</h4><p>平台级幂等:同任务 + 工具 + 参数只执行一次(实测拦 29 次重复回调);轨迹只存摘要,哈希链可校验未改动。</p></div>
   </div>
-  <p class="evidence"><b>可核证据:</b>内核 + 三插件共 2939 行 · 67 个测试全绿 · 三岗位各 100 单、整批重放 100/100 一致 · 16 工具 / 4 闸门同内核联跑 0 中止 · 轨迹哈希链 622 条校验通过</p>
+  <p class="evidence"><b>可核证据:</b>内核 + 四插件共 3543 行 · 135 个测试全绿 · 前三岗位各 100 单、整批重放 100/100 一致 · 22 工具 / 7 闸门四岗联跑(每岗 60 单)0 中止 · 四岗轨迹哈希链全部完整</p>
 </section>
 
 <section class="case" id="p-agentfin">
@@ -145,7 +145,7 @@ h1{font-size:50px;line-height:1.24;font-weight:800;letter-spacing:1px;max-width:
 
 <section class="case" id="p-memory">
   <div class="chead"><span class="cno">案例 04</span><h2>长时记忆与召回</h2><span class="cmeta">重庆智识维度 · 主导 · 运行中</span></div>
-  <p class="lede">记忆以<b>事件溯源</b>方式存储(纯追加 + 投影,任何时点可重建);召回用词法 + 向量双路、RRF 融合,融合后再过两道门。两件反直觉的事:重排器实测负贡献当场关停;旧评测集自查出泄漏,作废重建后再验。</p>
+  <p class="lede">记忆以<b>事件溯源</b>方式存储(纯追加 + 投影,任何时点可重建);召回用词法 + 向量双路、RRF 融合,融合后再过两道门;双臂召回端到端 <b>P@1 0.853 → 0.907</b>,精排推理 715ms → 45ms。</p>
   <div class="figure">
     <div class="flow">
       <div class="fnode"><div class="ft">会话回合</div><div class="fd">Stop hook 异步落库,确定性、无 LLM</div></div>
@@ -163,9 +163,9 @@ h1{font-size:50px;line-height:1.24;font-weight:800;letter-spacing:1px;max-width:
   <div class="designs">
     <div class="design"><h4><em>01</em>事件溯源</h4><p>纯追加 SSOT + 投影,revision 乐观并发;任何时点可从事件全量重放重建记忆状态。</p></div>
     <div class="design"><h4><em>02</em>双臂 + 两道门</h4><p>RRF 只用秩、不用分数(两臂量纲不可比);0.7 相对分门守住相关度,强命中保护防误杀。</p></div>
-    <div class="design"><h4><em>03</em>用数据否掉自己</h4><p>CE 重排同口径 A/B 实测负贡献(R@4 0.797 → 0.707)当场关停;旧评测集别名泄漏自查作废、去泄漏重建后再验。</p></div>
+    <div class="design"><h4><em>03</em>推理侧提速</h4><p>embedding 与精排服务 OpenVINO 部署,精排 715ms → 45ms(16 倍);召回质量与延迟同口径可测。</p></div>
   </div>
-  <p class="evidence"><b>可核证据:</b>P@1 0.853 → 0.907(64/75 → 68/75,同口径 A/B)· 去泄漏评测 R@10 0.870 → 0.911(n=728)· CE 重排负贡献即下架 · RRF c=60</p>
+  <p class="evidence"><b>可核证据:</b>P@1 0.853 → 0.907(64/75 → 68/75,同口径 A/B)· held-out 评测 R@10 0.870 → 0.911(n=728)· 精排 715ms → 45ms · RRF c=60</p>
 </section>
 
 <section class="case" id="p-loan">
@@ -249,7 +249,7 @@ h1{font-size:50px;line-height:1.24;font-weight:800;letter-spacing:1px;max-width:
 
 <section class="case" id="p-quant">
   <div class="chead"><span class="cno">案例 08</span><h2>量化交易系统</h2><span class="cmeta">自研 · 2025.12-2026.06 · 个人研究(未实盘)</span></div>
-  <p class="lede">A 股量化研究系统:ClickHouse 数据底座 + 撮合引擎 + walk-forward 训练与晋级。价值不在收益数字,在<b>防自欺的工程</b>——先校尺子再量策略,统计上站不住就不放行。</p>
+  <p class="lede">A 股量化研究系统:ClickHouse 数据底座 + 撮合引擎 + walk-forward 训练与晋级。价值不在收益数字,在<b>晋级闸</b>——三闸合取,统计上站不住的策略不放行。</p>
   <div class="figure">
     <div class="flow">
       <div class="fnode"><div class="ft">数据底座</div><div class="fd">303 张表 · 67 采集脚本 · 314 cron</div></div>
@@ -260,16 +260,16 @@ h1{font-size:50px;line-height:1.24;font-weight:800;letter-spacing:1px;max-width:
       <div class="farrow">→</div>
       <div class="fnode"><div class="ft">晋级</div><div class="fd">dry-run + 资金围栏 + 反向回滚</div></div>
       <div class="farrow">→</div>
-      <div class="fnode"><div class="ft">paper 验证</div><div class="fd">模拟盘,高 IC 亏钱照样翻案重查</div></div>
+      <div class="fnode"><div class="ft">paper 验证</div><div class="fd">模拟盘,统计指标与盈亏双口径复核</div></div>
     </div>
-    <div class="fnote"><span><span class="dot">◆</span>先校尺子:发现 top-k 持有 H 日用 1 日逐日复利(每笔重复复利约 H 次)→ 修正后 Sharpe 6.4 实为 2.9、MaxDD −81% 实为 −33%</span><span><span class="dot">◆</span>修正尺子 + 生产 base 复测 stacking:pbo 0.76 与随机无异 → 拒绝上线</span></div>
+    <div class="fnote"><span><span class="dot">◆</span>指标口径:按持有期复利,消除重叠复利虚高(overlap-aware)</span><span><span class="dot">◆</span>真实拦截案例:stacking 复测 pbo 0.76 与随机无异 → 拒绝上线</span></div>
   </div>
   <div class="designs">
-    <div class="design"><h4><em>01</em>防过拟合三闸</h4><p>DSR / PBO-CSCV / ΔIC 合取放行;sentiment 五轮翻盘识别为 p-hacking,硬 STOP、冻结代码等 fresh OOS。</p></div>
+    <div class="design"><h4><em>01</em>防过拟合三闸</h4><p>DSR / PBO-CSCV / ΔIC 三闸合取才放行;判不出显著性即硬 STOP,冻结代码等 fresh OOS。</p></div>
     <div class="design"><h4><em>02</em>数据取证工程</h4><p>幽灵回填用 CK system.part_log 定位到真实写入时刻与来源容器;PIT 前视靠写入侧 fail-closed,不靠自觉。</p></div>
-    <div class="design"><h4><em>03</em>反模式机检</h4><p>silent fail 从「逐个修」升级成 AST 元守卫(测试永久拦反模式);外部审计指控先独立证伪,防误修正确代码。</p></div>
+    <div class="design"><h4><em>03</em>反模式机检</h4><p>silent fail 用 AST 元守卫在测试层永久拦死,不靠逐个修与自觉。</p></div>
   </div>
-  <p class="evidence"><b>可核证据:</b>min5 全表 2.29 亿行 2.3s → 28ms(82×)· 修正尺子:Sharpe 6.4 → 2.9 · 三闸合取,pbo 0.76 拒绝上线 · 303 表 / 67 采集 / 314 cron</p>
+  <p class="evidence"><b>可核证据:</b>min5 全表 2.29 亿行 2.3s → 28ms(82×)· 三闸合取(DSR / PBO-CSCV / ΔIC)· 303 表 / 67 采集脚本 / 314 cron</p>
 </section>
 
 <div class="foot">
